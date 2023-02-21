@@ -530,6 +530,7 @@ select {
   flex: 1 1 400px;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 15px;
   padding-top: 20px;
 }

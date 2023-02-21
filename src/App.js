@@ -13,6 +13,7 @@ import bookingsJSON from './assets/data/bookings.json';
 function App() {
 	const [trips, setTrips] = useState(tripsJSON);
 	const [bookings, setBookings] = useState(bookingsJSON);
+
 	return (
 		<div className="App">
 			<Header />
@@ -21,7 +22,7 @@ function App() {
 				<Route path='/bookings' element={<Bookings bookings={bookings} />} />
 				<Route path='/sign-in' element={<SignIn />} />
 				<Route path='/sign-up' element={<SignUp />} />
-				<Route path="/trip/:tripId" element={<Trip />} />
+				<Route path="/trip/:tripId" element={<Trip trips={trips} />} />
 			</Routes>
 			<Footer />
 		</div>

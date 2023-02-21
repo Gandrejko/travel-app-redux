@@ -1,57 +1,64 @@
 import tripImage from '../assets/images/iceland.jpg';
+import {useParams} from "react-router-dom";
 
-export const Trip = () => {
+export const Trip = ({trips}) => {
+	const {tripId} = useParams();
+	const formattedTripId = tripId.slice(1, tripId.length)
+	const {
+		createdAt,
+		description,
+		duration,
+		id,
+		image,
+		level,
+		price,
+		title
+	} = trips.find(trip => trip.id === formattedTripId);
 	return (
-		<main class="trip-page">
-			<h1 class="visually-hidden">Travel App</h1>
-		<div class="trip">
+		<main className="trip-page">
+			<h1 className="visually-hidden">Travel App</h1>
+		<div className="trip">
 			<img
 				data-test-id="trip-details-image"
-				src={tripImage}
-				class="trip__img"
+				src={image}
+				className="trip__img"
 				alt="trip image"
 			/>
-			<div class="trip__content">
-				<div class="trip-info">
-					<h3 data-test-id="trip-details-title" class="trip-info__title">
-						Iceland
+			<div className="trip__content">
+				<div className="trip-info">
+					<h3 data-test-id="trip-details-title" className="trip-info__title">
+						{title}
 					</h3>
-					<div class="trip-info__content">
+					<div className="trip-info__content">
 				  <span
 					  data-test-id="trip-details-duration"
-					  class="trip-info__duration"
+					  className="trip-info__duration"
 				  >
-					<strong>15</strong> days
+					<strong>{duration}</strong> days
 				  </span>
-						<span data-test-id="trip-details-level" class="trip-info__level">
-					easy
+						<span data-test-id="trip-details-level" className="trip-info__level">
+					{level}
 				  </span>
 					</div>
 				</div>
 				<div
 					data-test-id="trip-details-description"
-					class="trip__description"
+					className="trip__description"
 				>
-					An island is a body of land surrounded by water. Continents are also
-					surrounded by water, but because they are so big, they are not
-					considered islands. Australia, the smallest continent, is more than
-					three times the size of Greenland, the largest island. There are
-					countless islands in the ocean, lakes, and rivers around the world.
-					They vary greatly in size, climate, and the kinds of organisms that
-					inhabit them.
+					{description}
 				</div>
-				<div class="trip-price">
+				<div className="trip-price">
 					<span>Price</span>
 					<strong
 						data-test-id="trip-details-price-value"
-						class="trip-price__value"
+						className="trip-price__value"
 					>
-						7000 $
+						{price} $
 					</strong>
 				</div>
 				<button
 					data-test-id="trip-details-button"
-					class="trip__button button"
+					className="trip__button button"
 				>
 					Book a trip
 				</button>

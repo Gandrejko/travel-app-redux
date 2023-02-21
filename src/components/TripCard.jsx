@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 export const TripCard = ({id, title, price, level, image, duration}) => {
-	console.log(id, title, price, level, image, duration)
 	return (
 		<li data-test-id="trip-card" className="trip-card">
 			<img
@@ -35,7 +34,7 @@ export const TripCard = ({id, title, price, level, image, duration}) => {
 					</strong>
 				</div>
 			</div>
-			<Link data-test-id="trip-card-link" to="trip/:tripId" className="button">
+			<Link data-test-id="trip-card-link" to={`trip/:${id}`} className="button">
 				Discover a trip
 			</Link>
 		</li>
