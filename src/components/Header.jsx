@@ -1,23 +1,24 @@
 import user from '../assets/images/user.svg';
 import briefcase from '../assets/images/briefcase.svg';
+import {Link} from "react-router-dom";
 export const Header = () => {
 	return (
 		<header className="header">
 			<div className="header__inner">
-				<a data-test-id="header-logo" href="#" className="header__logo">
+				<Link data-test-id="header-logo" to="/" className="header__logo">
 					Travel App
-				</a>
+				</Link>
 				<nav data-test-id="header-nav" className="header__nav">
 					<ul className="nav-header__list">
 						<li className="nav-header__item" title="Bookings">
-							<a
+							<Link
 								data-test-id="header-bookings-link"
-								href="#"
+								to="bookings"
 								className="nav-header__inner"
 							>
 								<span className="visually-hidden">Bookings</span>
 								<img src={briefcase} alt=" icon"/>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-header__item" title="Profile">
 							<div
@@ -38,13 +39,13 @@ export const Header = () => {
 										John Doe
 									</li>
 									<li className="profile-nav__item">
-										<a
+										<Link
 											data-test-id="header-profile-nav-sign-out"
-											href="#"
+											to="sign-in"
 											className="profile-nav__sign-out button"
 										>
 											Sign Out
-										</a>
+										</Link>
 									</li>
 								</ul>
 							</div>
