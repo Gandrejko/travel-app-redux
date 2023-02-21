@@ -1,7 +1,7 @@
 import heart from '../assets/images/heart.svg';
 export const Footer = () => {
 	return (
-		<div className='footer'>
+		<footer className='footer'>
 			<span className="footer__text">
 				from
 				<a className="footer__link" href="https://binary-studio.com">
@@ -14,6 +14,6 @@ export const Footer = () => {
 					alt="heart icon"
 				/>
 			</span>
-		</div>
+		</footer>
 	)
 }
