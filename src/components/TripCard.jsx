@@ -1,27 +1,27 @@
-import tripImage from '../assets/images/iceland.jpg';
 import {Link} from "react-router-dom";
-export const TripCard = () => {
+export const TripCard = ({id, title, price, level, image, duration}) => {
+	console.log(id, title, price, level, image, duration)
 	return (
 		<li data-test-id="trip-card" className="trip-card">
 			<img
 				data-test-id="trip-card-image"
-				src={tripImage}
+				src={image}
 				alt="trip image"
 			/>
 			<div className="trip-card__content">
 				<div className="trip-info">
 					<h3 data-test-id="trip-card-title" className="trip-info__title">
-						Iceland
+						{title}
 					</h3>
 					<div className="trip-info__content">
                   <span
 					  data-test-id="trip-card-duration"
 					  className="trip-info__duration"
 				  >
-                    <strong>15</strong> days
+                    <strong>{duration}</strong> days
                   </span>
 						<span data-test-id="trip-card-level" className="trip-info__level">
-                    easy
+                    {level}
                   </span>
 					</div>
 				</div>
@@ -31,7 +31,7 @@ export const TripCard = () => {
 						data-test-id="trip-card-price-value"
 						className="trip-price__value"
 					>
-						7000 $
+						{price} $
 					</strong>
 				</div>
 			</div>

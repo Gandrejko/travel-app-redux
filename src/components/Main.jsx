@@ -1,12 +1,11 @@
 import {Filter} from "./Filter";
 import {Trips} from "./Trips";
-
-export const Main = () => {
+export const Main = ({trips}) => {
 	return (
 		<main>
 			<h1 className="visually-hidden">Travel App</h1>
 			<Filter />
-			<Trips />
+			<Trips trips={trips}/>
 		</main>
 	)
 }
