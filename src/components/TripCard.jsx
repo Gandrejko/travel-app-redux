@@ -1,10 +1,11 @@
-import iceland from '../assets/images/iceland.jpg';
+import tripImage from '../assets/images/iceland.jpg';
+import {Link} from "react-router-dom";
 export const TripCard = () => {
 	return (
 		<li data-test-id="trip-card" className="trip-card">
 			<img
 				data-test-id="trip-card-image"
-				src={iceland}
+				src={tripImage}
 				alt="trip image"
 			/>
 			<div className="trip-card__content">
@@ -34,9 +35,9 @@ export const TripCard = () => {
 					</strong>
 				</div>
 			</div>
-			<a data-test-id="trip-card-link" href="#" className="button">
+			<Link data-test-id="trip-card-link" to="trip/:tripId" className="button">
 				Discover a trip
-			</a>
+			</Link>
 		</li>
 	)
 }
