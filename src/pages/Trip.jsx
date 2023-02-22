@@ -1,4 +1,3 @@
-import tripImage from '../assets/images/iceland.jpg';
 import {useParams} from "react-router-dom";
 
 export const Trip = ({trips}) => {

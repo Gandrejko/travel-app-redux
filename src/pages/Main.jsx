@@ -1,5 +1,5 @@
-import {Filter} from "./Filter";
-import {Trips} from "./Trips";
+import {Filter} from "../components/Filter";
+import {Trips} from "../components/Trips";
 export const Main = ({trips}) => {
 	return (
 		<main>
