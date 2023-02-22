@@ -23,7 +23,8 @@ export const Trip = ({ trips, addBooking }) => {
     setTotalPrice(newValue * price);
   };
 
-  const createBooking = () => {
+  const createBooking = (e) => {
+    e.preventDefault();
     const dateInFuture = new Date(date) > new Date();
     if (!numberOfGuests || !date || !dateInFuture) {
       return;

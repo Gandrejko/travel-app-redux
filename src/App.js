@@ -9,13 +9,30 @@ import { Trip } from "./pages/Trip";
 import { useState } from "react";
 import tripsJSON from "./assets/data/trips.json";
 import bookingsJSON from "./assets/data/bookings.json";
+import { filterByDuration } from "./functions/filterByDuration";
+import { filterByLevel } from "./functions/filterByLevel";
+import { filterBySearch } from "./functions/filterBySearch";
 
 function App() {
   const trips = tripsJSON;
+  const [filteredTrips, setFilteredTrips] = useState(trips);
   const [bookings, setBookings] = useState(bookingsJSON);
   const [isLogin, setIsLogin] = useState(false);
 
-  const navigate = useNavigate();
+  const filterTrips = ({ search = "", duration = "", level = "" }) => {
+    let newTrips = trips;
+    if (search) {
+      newTrips = filterBySearch(trips, search);
+    }
+    if (duration) {
+      newTrips = filterByDuration(newTrips, duration);
+    }
+    if (level) {
+      newTrips = filterByLevel(newTrips, level);
+    }
+
+    setFilteredTrips(newTrips);
+  };
 
   const addBooking = (newBooking) => {
     setBookings((prevState) => {
@@ -35,7 +52,13 @@ function App() {
         <Route path="/">
           <Route
             index
-            element={<Main trips={trips} setIsLogin={setIsLogin} />}
+            element={
+              <Main
+                trips={filteredTrips}
+                setIsLogin={setIsLogin}
+                filterTrips={filterTrips}
+              />
+            }
           />
           <Route
             path="bookings"
@@ -47,7 +70,7 @@ function App() {
           <Route path="sign-up" element={<SignUp setIsLogin={setIsLogin} />} />
           <Route
             path="trip/:tripId"
-            element={<Trip trips={trips} addBooking={addBooking} />}
+            element={<Trip trips={filteredTrips} addBooking={addBooking} />}
           />
         </Route>
       </Routes>
