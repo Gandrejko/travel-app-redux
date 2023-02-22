@@ -2,14 +2,18 @@ import user from "../assets/images/user.svg";
 import briefcase from "../assets/images/briefcase.svg";
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const Header = ({ isLogin }) => {
   return (
     <header className="header">
       <div className="header__inner">
         <Link data-test-id="header-logo" to="/" className="header__logo">
           Travel App
         </Link>
-        <nav data-test-id="header-nav" className="header__nav">
+        <nav
+          hidden={!isLogin}
+          data-test-id="header-nav"
+          className="header__nav"
+        >
           <ul className="nav-header__list">
             <li className="nav-header__item" title="Bookings">
               <Link

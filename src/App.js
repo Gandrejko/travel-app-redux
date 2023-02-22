@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Main } from "./pages/Main";
@@ -11,8 +11,11 @@ import tripsJSON from "./assets/data/trips.json";
 import bookingsJSON from "./assets/data/bookings.json";
 
 function App() {
-  const [trips, setTrips] = useState(tripsJSON);
+  const trips = tripsJSON;
   const [bookings, setBookings] = useState(bookingsJSON);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const navigate = useNavigate();
 
   const addBooking = (newBooking) => {
     setBookings((prevState) => {
@@ -27,21 +30,26 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header isLogin={isLogin} />
       <Routes>
-        <Route path="/" element={<Main trips={trips} />} />
-        <Route
-          path="/bookings"
-          element={
-            <Bookings bookings={bookings} deleteBooking={deleteBooking} />
-          }
-        />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route
-          path="/trip/:tripId"
-          element={<Trip trips={trips} addBooking={addBooking} />}
-        />
+        <Route path="/">
+          <Route
+            index
+            element={<Main trips={trips} setIsLogin={setIsLogin} />}
+          />
+          <Route
+            path="bookings"
+            element={
+              <Bookings bookings={bookings} deleteBooking={deleteBooking} />
+            }
+          />
+          <Route path="sign-in" element={<SignIn setIsLogin={setIsLogin} />} />
+          <Route path="sign-up" element={<SignUp setIsLogin={setIsLogin} />} />
+          <Route
+            path="trip/:tripId"
+            element={<Trip trips={trips} addBooking={addBooking} />}
+          />
+        </Route>
       </Routes>
       <Footer />
     </div>

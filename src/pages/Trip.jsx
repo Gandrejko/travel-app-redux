@@ -117,7 +117,7 @@ export const Trip = ({ trips, addBooking }) => {
             <form
               className="book-trip-popup__form"
               autoComplete="off"
-              onSubmit={(event) => event.preventDefault()}
+              onSubmit={createBooking}
             >
               <div className="trip-info">
                 <h3
@@ -177,7 +177,6 @@ export const Trip = ({ trips, addBooking }) => {
                 data-test-id="book-trip-popup-submit"
                 className="button"
                 type="submit"
-                onClick={createBooking}
               >
                 Book a trip
               </button>

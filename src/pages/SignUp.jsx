@@ -1,6 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-export const SignUp = () => {
+export const SignUp = ({ setIsLogin }) => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    setIsLogin(false);
+  }, []);
+
+  const signIn = (e) => {
+    e.preventDefault();
+    setIsLogin(true);
+    return navigate("/");
+  };
   return (
     <main className="sign-up-page">
       <h1 className="visually-hidden">Travel App</h1>
@@ -29,7 +40,12 @@ export const SignUp = () => {
             required
           />
         </label>
-        <button data-test-id="auth-submit" className="button" type="submit">
+        <button
+          data-test-id="auth-submit"
+          className="button"
+          type="submit"
+          onClick={(e) => signIn(e)}
+        >
           Sign Up
         </button>
       </form>
@@ -37,7 +53,7 @@ export const SignUp = () => {
         Already have an account?
         <Link
           data-test-id="auth-sign-in-link"
-          to="../sign-in"
+          to="/sign-in"
           className="sign-up-form__link"
         >
           Sign In
