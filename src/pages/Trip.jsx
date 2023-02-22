@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { randomId } from "../functions/randomId";
 
-export const Trip = ({ trips }) => {
+export const Trip = ({ trips, addBooking }) => {
   const { tripId } = useParams();
   const formattedTripId = tripId.slice(1, tripId.length);
   const { createdAt, description, duration, id, image, level, price, title } =
@@ -10,7 +11,8 @@ export const Trip = ({ trips }) => {
   const [modalHide, setModalHide] = useState(true);
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);
-
+  const [date, setDate] = useState();
+  const [userId, setUserId] = useState("1dd97a12-848f-4a1d-8a7d-34a2132fca94");
   const changeInput = (value) => {
     let newValue;
     if (value > 10) newValue = 10;
@@ -19,6 +21,29 @@ export const Trip = ({ trips }) => {
 
     setNumberOfGuests(newValue);
     setTotalPrice(newValue * price);
+  };
+
+  const createBooking = () => {
+    const dateInFuture = new Date(date) > new Date();
+    if (!numberOfGuests || !date || !dateInFuture) {
+      return;
+    }
+    const newBooking = {
+      id: randomId(),
+      userId: userId,
+      tripId: tripId,
+      guests: numberOfGuests,
+      date: JSON.stringify(date),
+      trip: {
+        title: title,
+        duration: duration,
+        price: price,
+      },
+      totalPrice: totalPrice,
+      createdAt: createdAt,
+    };
+    addBooking(newBooking);
+    setModalHide(true);
   };
   return (
     <>
@@ -89,7 +114,11 @@ export const Trip = ({ trips }) => {
             >
               ×
             </button>
-            <form className="book-trip-popup__form" autoComplete="off">
+            <form
+              className="book-trip-popup__form"
+              autoComplete="off"
+              onSubmit={(event) => event.preventDefault()}
+            >
               <div className="trip-info">
                 <h3
                   data-test-id="book-trip-popup-title"
@@ -119,6 +148,7 @@ export const Trip = ({ trips }) => {
                   name="date"
                   type="date"
                   required
+                  onChange={(e) => setDate(e.target.valueAsDate)}
                 />
               </label>
               <label className="input">
@@ -147,6 +177,7 @@ export const Trip = ({ trips }) => {
                 data-test-id="book-trip-popup-submit"
                 className="button"
                 type="submit"
+                onClick={createBooking}
               >
                 Book a trip
               </button>
