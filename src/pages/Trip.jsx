@@ -5,6 +5,7 @@ import { TripTitle } from "../components/Trip/TripTitle";
 import { TripDuration } from "../components/Trip/TripDuration";
 import { TripLevel } from "../components/Trip/TripLevel";
 import { TripPrice } from "../components/Trip/TripPrice";
+import { stringifyDate } from "../functions/stringifyDate";
 
 export const Trip = ({ trips, addBooking }) => {
   const { tripId } = useParams();
@@ -38,15 +39,16 @@ export const Trip = ({ trips, addBooking }) => {
       userId: userId,
       tripId: id,
       guests: numberOfGuests,
-      date: JSON.stringify(date).slice(1, -1),
+      date: stringifyDate(date),
       trip: {
         title: title,
         duration: duration,
         price: price,
       },
       totalPrice: totalPrice,
-      createdAt: new Date(),
+      createdAt: stringifyDate(new Date()),
     };
+    console.log(newBooking);
     addBooking(newBooking);
     setModalHide(true);
   };
