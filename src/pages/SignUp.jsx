@@ -1,18 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { Email } from "../components/Inputs/EmailInput";
 import { Password } from "../components/Inputs/Password";
 import { FullName } from "../components/Inputs/FullName";
 
-export const SignUp = ({ setIsLogin }) => {
+export const SignUp = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    setIsLogin(false);
-  }, []);
 
   const signUp = (e) => {
     e.preventDefault();
-    setIsLogin(true);
     return navigate("/");
   };
   return (

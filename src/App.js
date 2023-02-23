@@ -6,21 +6,41 @@ import { Bookings } from "./pages/Bookings";
 import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Trip } from "./pages/Trip";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import tripsJSON from "./assets/data/trips.json";
 import bookingsJSON from "./assets/data/bookings.json";
 import { filterByDuration } from "./functions/filterByDuration";
 import { filterByLevel } from "./functions/filterByLevel";
 import { filterBySearch } from "./functions/filterBySearch";
 import { sortBookingsByDate } from "./functions/sortBookingsByDate";
+import { TRIP_ROUTE_PATTERN } from "./routes";
+
+const trips = tripsJSON;
 
 function App() {
-  const trips = tripsJSON;
-  const [filteredTrips, setFilteredTrips] = useState(trips);
   const [bookings, setBookings] = useState(bookingsJSON);
-  const [isLogin, setIsLogin] = useState(true);
 
-  const filterTrips = ({ search = "", duration = "", level = "" }) => {
+  const [search, setSearch] = useState("");
+  const [duration, setDuration] = useState("");
+  const [level, setLevel] = useState("");
+
+  const filterTrips = ({
+    search = undefined,
+    duration = undefined,
+    level = undefined,
+  }) => {
+    if (search !== undefined) {
+      setSearch(search);
+    }
+    if (duration !== undefined) {
+      setDuration(duration);
+    }
+    if (level !== undefined) {
+      setLevel(level);
+    }
+  };
+
+  const filteredTrips = useMemo(() => {
     let newTrips = trips;
     if (search) {
       newTrips = filterBySearch(trips, search);
@@ -32,13 +52,13 @@ function App() {
       newTrips = filterByLevel(newTrips, level);
     }
 
-    setFilteredTrips(newTrips);
-  };
+    return newTrips;
+  }, [search, duration, level]);
 
   const addBooking = (newBooking) => {
     setBookings((prevState) => {
-      prevState.push(newBooking);
-      return sortBookingsByDate(prevState);
+      // dont't mutate the new state
+      return sortBookingsByDate([...prevState, newBooking]);
     });
   };
 
@@ -53,7 +73,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLogin={isLogin} />
+      <Header />
       <Routes>
         <Route path="/">
           <Route
@@ -61,8 +81,10 @@ function App() {
             element={
               <Main
                 trips={filteredTrips}
-                setIsLogin={setIsLogin}
                 filterTrips={filterTrips}
+                level={level}
+                duration={duration}
+                search={search}
               />
             }
           />
@@ -72,14 +94,13 @@ function App() {
               <Bookings bookings={bookings} deleteBooking={deleteBooking} />
             }
           />
-          <Route path="sign-in" element={<SignIn setIsLogin={setIsLogin} />} />
-          <Route path="sign-up" element={<SignUp setIsLogin={setIsLogin} />} />
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="sign-up" element={<SignUp />} />
           <Route
-            path="trip/:tripId"
+            path={TRIP_ROUTE_PATTERN}
             element={<Trip trips={filteredTrips} addBooking={addBooking} />}
           />
           <Route path="*" element={<Navigate to="/" />} />
-          }/>
         </Route>
       </Routes>
       <Footer />

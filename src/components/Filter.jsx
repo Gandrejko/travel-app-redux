@@ -1,12 +1,4 @@
-import { useEffect, useState } from "react";
-
-export const Filter = ({ filterTrips }) => {
-  const [search, setSearch] = useState("");
-  const [duration, setDuration] = useState("");
-  const [level, setLevel] = useState("");
-  useEffect(() => {
-    filterTrips({ search, duration, level });
-  }, [search, duration, level]);
+export const Filter = ({ filterTrips, search, level, duration }) => {
   return (
     <section className="trips-filter">
       <h2 className="visually-hidden">Trips filter</h2>
@@ -23,7 +15,7 @@ export const Filter = ({ filterTrips }) => {
             type="search"
             value={search}
             placeholder="search by title"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => filterTrips({ search: e.target.value })}
           />
         </label>
         <label className="select">
@@ -31,7 +23,8 @@ export const Filter = ({ filterTrips }) => {
           <select
             data-test-id="filter-duration"
             name="duration"
-            onChange={(e) => setDuration(e.target.value)}
+            value={duration}
+            onChange={(e) => filterTrips({ duration: e.target.value })}
           >
             <option value="">duration</option>
             <option value="0_x_5">&lt; 5 days</option>
@@ -42,9 +35,10 @@ export const Filter = ({ filterTrips }) => {
         <label className="select">
           <span className="visually-hidden">Search by level</span>
           <select
+            value={level}
             data-test-id="filter-level"
             name="level"
-            onChange={(e) => setLevel(e.target.value)}
+            onChange={(e) => filterTrips({ level: e.target.value })}
           >
             <option value="">level</option>
             <option value="easy">easy</option>

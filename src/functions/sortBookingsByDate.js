@@ -1,5 +1,6 @@
 export const sortBookingsByDate = (bookings) => {
-  return bookings.sort((a, b) => {
+  // it's a good form not to mutate input
+  return [...bookings].sort((a, b) => {
     return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 };

@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 import { TripDuration } from "./Trip/TripDuration";
 import { TripPrice } from "./Trip/TripPrice";
 import { TripLevel } from "./Trip/TripLevel";
 import { TripTitle } from "./Trip/TripTitle";
+import { TRIP_ROUTE_PATTERN } from "../routes";
 
 export const TripCard = ({ id, title, price, level, image, duration }) => {
   return (
@@ -18,7 +19,11 @@ export const TripCard = ({ id, title, price, level, image, duration }) => {
         </div>
         <TripPrice>{price}</TripPrice>
       </div>
-      <Link data-test-id="trip-card-link" to={`trip/:${id}`} className="button">
+      <Link
+        data-test-id="trip-card-link"
+        to={generatePath(TRIP_ROUTE_PATTERN, { tripId: id })}
+        className="button"
+      >
         Discover a trip
       </Link>
     </li>

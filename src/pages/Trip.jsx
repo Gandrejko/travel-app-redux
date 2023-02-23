@@ -48,7 +48,6 @@ export const Trip = ({ trips, addBooking }) => {
       totalPrice: totalPrice,
       createdAt: stringifyDate(new Date()),
     };
-    console.log(newBooking);
     addBooking(newBooking);
     setModalHide(true);
   };
