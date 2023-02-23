@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { TripDuration } from "./Trip/TripDuration";
+import { TripPrice } from "./Trip/TripPrice";
+import { TripLevel } from "./Trip/TripLevel";
+import { TripTitle } from "./Trip/TripTitle";
 
 export const TripCard = ({ id, title, price, level, image, duration }) => {
   return (
@@ -6,30 +10,13 @@ export const TripCard = ({ id, title, price, level, image, duration }) => {
       <img data-test-id="trip-card-image" src={image} alt="trip image" />
       <div className="trip-card__content">
         <div className="trip-info">
-          <h3 data-test-id="trip-card-title" className="trip-info__title">
-            {title}
-          </h3>
+          <TripTitle>{title}</TripTitle>
           <div className="trip-info__content">
-            <span
-              data-test-id="trip-card-duration"
-              className="trip-info__duration"
-            >
-              <strong>{duration}</strong> days
-            </span>
-            <span data-test-id="trip-card-level" className="trip-info__level">
-              {level}
-            </span>
+            <TripDuration>{duration}</TripDuration>
+            <TripLevel>{level}</TripLevel>
           </div>
         </div>
-        <div className="trip-price">
-          <span>Price</span>
-          <strong
-            data-test-id="trip-card-price-value"
-            className="trip-price__value"
-          >
-            {price} $
-          </strong>
-        </div>
+        <TripPrice>{price}</TripPrice>
       </div>
       <Link data-test-id="trip-card-link" to={`trip/:${id}`} className="button">
         Discover a trip

@@ -1,5 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Email } from "../components/Inputs/EmailInput";
+import { Password } from "../components/Inputs/Password";
+import { FullName } from "../components/Inputs/FullName";
 
 export const SignUp = ({ setIsLogin }) => {
   const navigate = useNavigate();
@@ -17,31 +20,9 @@ export const SignUp = ({ setIsLogin }) => {
       <h1 className="visually-hidden">Travel App</h1>
       <form className="sign-up-form" autoComplete="off" onSubmit={signUp}>
         <h2 className="sign-up-form__title">Sign Up</h2>
-        <label className="input">
-          <span className="input__heading">Full name</span>
-          <input
-            data-test-id="auth-full-name"
-            name="full-name"
-            type="text"
-            required
-          />
-        </label>
-        <label className="input">
-          <span className="input__heading">Email</span>
-          <input data-test-id="auth-email" name="email" type="email" required />
-        </label>
-        <label className="input">
-          <span className="input__heading">Password</span>
-          <input
-            data-test-id="auth-password"
-            name="password"
-            type="password"
-            minLength="3"
-            maxLength="20"
-            autoComplete="new-password"
-            required
-          />
-        </label>
+        <FullName />
+        <Email />
+        <Password />
         <button data-test-id="auth-submit" className="button" type="submit">
           Sign Up
         </button>

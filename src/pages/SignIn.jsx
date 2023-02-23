@@ -1,5 +1,7 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Email } from "../components/Inputs/EmailInput";
+import { Password } from "../components/Inputs/Password";
 
 export const SignIn = ({ setIsLogin }) => {
   const navigate = useNavigate();
@@ -18,22 +20,8 @@ export const SignIn = ({ setIsLogin }) => {
       <h1 className="visually-hidden">Travel App</h1>
       <form className="sign-in-form" autoComplete="off" onSubmit={signIn}>
         <h2 className="sign-in-form__title">Sign In</h2>
-        <label className="input">
-          <span className="input__heading">Email</span>
-          <input data-test-id="auth-email" name="email" type="email" required />
-        </label>
-        <label className="input">
-          <span className="input__heading">Password</span>
-          <input
-            data-test-id="auth-password"
-            name="password"
-            type="password"
-            minLength="3"
-            maxLength="20"
-            autoComplete="new-password"
-            required
-          />
-        </label>
+        <Email />
+        <Password />
         <button data-test-id="auth-submit" className="button" type="submit">
           Sign In
         </button>

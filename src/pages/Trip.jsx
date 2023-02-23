@@ -1,6 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { randomId } from "../functions/randomId";
+import { TripTitle } from "../components/Trip/TripTitle";
+import { TripDuration } from "../components/Trip/TripDuration";
+import { TripLevel } from "../components/Trip/TripLevel";
+import { TripPrice } from "../components/Trip/TripPrice";
 
 export const Trip = ({ trips, addBooking }) => {
   const { tripId } = useParams();
@@ -59,25 +63,10 @@ export const Trip = ({ trips, addBooking }) => {
           />
           <div className="trip__content">
             <div className="trip-info">
-              <h3
-                data-test-id="trip-details-title"
-                className="trip-info__title"
-              >
-                {title}
-              </h3>
+              <TripTitle>{title}</TripTitle>
               <div className="trip-info__content">
-                <span
-                  data-test-id="trip-details-duration"
-                  className="trip-info__duration"
-                >
-                  <strong>{duration}</strong> days
-                </span>
-                <span
-                  data-test-id="trip-details-level"
-                  className="trip-info__level"
-                >
-                  {level}
-                </span>
+                <TripDuration>{duration}</TripDuration>
+                <TripLevel>{level}</TripLevel>
               </div>
             </div>
             <div
@@ -86,15 +75,7 @@ export const Trip = ({ trips, addBooking }) => {
             >
               {description}
             </div>
-            <div className="trip-price">
-              <span>Price</span>
-              <strong
-                data-test-id="trip-details-price-value"
-                className="trip-price__value"
-              >
-                {price} $
-              </strong>
-            </div>
+            <TripPrice>{price}</TripPrice>
             <button
               data-test-id="trip-details-button"
               className="trip__button button"
