@@ -25,23 +25,23 @@ export const Trip = ({ trips, addBooking }) => {
 
   const createBooking = (e) => {
     e.preventDefault();
-    const dateInFuture = new Date(date) > new Date();
+    const dateInFuture = new Date(date).getTime() > new Date().getTime();
     if (!numberOfGuests || !date || !dateInFuture) {
       return;
     }
     const newBooking = {
       id: randomId(),
       userId: userId,
-      tripId: tripId,
+      tripId: id,
       guests: numberOfGuests,
-      date: JSON.stringify(date),
+      date: JSON.stringify(date).slice(1, -1),
       trip: {
         title: title,
         duration: duration,
         price: price,
       },
       totalPrice: totalPrice,
-      createdAt: createdAt,
+      createdAt: new Date(),
     };
     addBooking(newBooking);
     setModalHide(true);

@@ -28,6 +28,8 @@ export const SignIn = ({ setIsLogin }) => {
             data-test-id="auth-password"
             name="password"
             type="password"
+            minLength="3"
+            maxLength="20"
             autoComplete="new-password"
             required
           />

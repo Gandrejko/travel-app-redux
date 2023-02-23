@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Main } from "./pages/Main";
@@ -12,12 +12,13 @@ import bookingsJSON from "./assets/data/bookings.json";
 import { filterByDuration } from "./functions/filterByDuration";
 import { filterByLevel } from "./functions/filterByLevel";
 import { filterBySearch } from "./functions/filterBySearch";
+import { sortBookingsByDate } from "./functions/sortBookingsByDate";
 
 function App() {
   const trips = tripsJSON;
   const [filteredTrips, setFilteredTrips] = useState(trips);
   const [bookings, setBookings] = useState(bookingsJSON);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   const filterTrips = ({ search = "", duration = "", level = "" }) => {
     let newTrips = trips;
@@ -37,12 +38,17 @@ function App() {
   const addBooking = (newBooking) => {
     setBookings((prevState) => {
       prevState.push(newBooking);
-      return prevState;
+      return sortBookingsByDate(prevState);
     });
   };
 
   const deleteBooking = (bookingId) => {
-    setBookings(bookings.filter((booking) => booking.id !== bookingId));
+    setBookings((prevState) => {
+      const newBookings = prevState.filter(
+        (booking) => booking.id !== bookingId
+      );
+      return sortBookingsByDate(newBookings);
+    });
   };
 
   return (
@@ -72,6 +78,8 @@ function App() {
             path="trip/:tripId"
             element={<Trip trips={filteredTrips} addBooking={addBooking} />}
           />
+          <Route path="*" element={<Navigate to="/" />} />
+          }/>
         </Route>
       </Routes>
       <Footer />
