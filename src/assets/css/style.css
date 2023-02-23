@@ -91,6 +91,13 @@ body {
   background-color: var(--color-white);
 }
 
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 main {
   display: flex;
   flex-grow: 1;
@@ -159,7 +166,6 @@ select {
   min-height: 45px;
   padding: 10px 40px 10px 15px;
   font-size: var(--font-size-300);
-  background-color: var(--color-white);
   background-color: var(--color-white);
   background-image: url('../images/arrow-down.svg');
   background-repeat: no-repeat;
@@ -477,11 +483,18 @@ select {
 
 .trip-card {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   max-width: 320px;
   background-color: var(--color-white);
   border-radius: 1px;
   box-shadow: var(--shadow);
+}
+
+.trip-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .trip-card__content {
@@ -517,6 +530,7 @@ select {
   flex: 1 1 400px;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 15px;
   padding-top: 20px;
 }
