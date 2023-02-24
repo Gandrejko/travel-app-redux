@@ -1,6 +1,9 @@
-import { IBookingCard } from "../interfaces/IBookingCard";
+import { IBooking } from "../interfaces/booking.interface";
 
-export const BookingCard: React.FC<IBookingCard> = ({
+export interface IBookingCardProps extends IBooking {
+  onClick: (id: string) => void;
+}
+export const BookingCard: React.FC<IBookingCardProps> = ({
   id,
   guests,
   date,
