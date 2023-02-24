@@ -1,0 +1,7 @@
+import { ITrip } from "../interfaces/trip.interface";
+
+export const filterBySearch = (trips: ITrip[], search: string) => {
+  return trips.filter(
+    (trip) => trip.title.toLowerCase().search(search.toLowerCase()) > 0 // but contains is better)
+  );
+};
