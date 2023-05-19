@@ -9,7 +9,6 @@ export const filterByDuration = (trips: ITrip[], duration: string): ITrip[] => {
       max = 5;
       break;
     case "5_x_10":
-      min = 5;
       max = 10;
       break;
     case "10_x":

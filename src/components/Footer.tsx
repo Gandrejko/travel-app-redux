@@ -1,4 +1,4 @@
-import { Heart } from "../assets/images/heart";
+import { ReactComponent as Heart } from "../assets/images/heart.svg";
 
 export const Footer = () => {
   return (

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Briefcase } from "../assets/images/briefcase";
-import { User } from "../assets/images/user";
+import { ReactComponent as Briefcase } from "../assets/images/briefcase.svg";
+import { ReactComponent as User } from "../assets/images/user.svg";
 
 export const Nav = () => (
   <nav data-test-id="header-nav" className="header__nav">

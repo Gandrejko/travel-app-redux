@@ -2,7 +2,6 @@ import { Dispatch, useEffect } from "react";
 import { Filter } from "../components/Filter";
 import { Trips } from "../components/Trips";
 import { ITrip } from "../interfaces/trip.interface";
-import { IFilterProps } from "../interfaces/filter-props.interface";
 import { IFilterTrips } from "../interfaces/filter-trips.interface";
 
 interface IMainProps {

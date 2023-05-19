@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Email } from "../components/Inputs/EmailInput";
 import { Password } from "../components/Inputs/Password";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, useEffect } from "react";
 
 interface ISignInProps {
   setIsLogin: Dispatch<boolean>;

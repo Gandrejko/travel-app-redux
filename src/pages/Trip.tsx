@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { randomId } from "../helpers/randomId";
 import { TripTitle } from "../components/Trip/TripTitle";
 import { TripDuration } from "../components/Trip/TripDuration";
 import { TripLevel } from "../components/Trip/TripLevel";
@@ -8,6 +7,7 @@ import { TripPrice } from "../components/Trip/TripPrice";
 import { stringifyDate } from "../helpers/stringifyDate";
 import { ITrip } from "../interfaces/trip.interface";
 import { IBooking } from "../interfaces/booking.interface";
+import { v4 } from 'uuid';
 
 interface ITripProps {
   trips: ITrip[];
@@ -28,9 +28,15 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
 
   const changeInput = (value: number) => {
     let newValue;
-    if (value > 10) newValue = 10;
-    else if (value < 0) newValue = 0;
-    else newValue = value;
+    if (value > 10) {
+      newValue = 10;
+    }
+    else if (value < 0) {
+      newValue = 0;
+    }
+    else {
+      newValue = value;
+    }
 
     setNumberOfGuests(newValue);
     setTotalPrice(newValue * price);
@@ -44,7 +50,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
       return;
     }
     const newBooking = {
-      id: randomId(),
+      id: v4(),
       userId: userId,
       tripId: id,
       guests: numberOfGuests,
