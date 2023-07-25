@@ -1,20 +1,20 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { TripTitle } from "../components/Trip/TripTitle";
-import { TripDuration } from "../components/Trip/TripDuration";
-import { TripLevel } from "../components/Trip/TripLevel";
-import { TripPrice } from "../components/Trip/TripPrice";
-import { stringifyDate } from "../helpers/stringifyDate";
+import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import { TripTitle } from "../components/trip/trip-title";
+import { TripDuration } from "../components/trip/trip-duration";
+import { TripLevel } from "../components/trip/trip-level";
+import { TripPrice } from "../components/trip/trip-price";
+import { stringifyDate } from "../helpers/stringify-date";
 import { ITrip } from "../interfaces/trip.interface";
 import { IBooking } from "../interfaces/booking.interface";
 import { v4 } from 'uuid';
 
-interface ITripProps {
+interface ITripPageProps {
   trips: ITrip[];
   addBooking: (booking: IBooking) => void;
 }
 
-export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
+export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
   const { tripId } = useParams();
 
   const card = trips.find((trip) => trip.id === tripId) || trips[0];
@@ -24,7 +24,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [totalPrice, setTotalPrice] = useState(price);
   const [date, setDate] = useState<string>();
-  const [userId, setUserId] = useState("1dd97a12-848f-4a1d-8a7d-34a2132fca94");
+  const [userId] = useState("1dd97a12-848f-4a1d-8a7d-34a2132fca94");
 
   const changeInput = (value: number) => {
     let newValue;
@@ -42,7 +42,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
     setTotalPrice(newValue * price);
   };
 
-  const createBooking = (e: React.SyntheticEvent) => {
+  const createBooking = (e: SyntheticEvent) => {
     e.preventDefault();
     const dateInFuture =
       date && new Date(date).getTime() > new Date().getTime();
@@ -75,7 +75,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
             data-test-id="trip-details-image"
             src={image}
             className="trip__img"
-            alt="trip image"
+            alt="trip"
           />
           <div className="trip__content">
             <div className="trip-info">
@@ -146,7 +146,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
                   name="date"
                   type="date"
                   required
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     setDate(e.target.value)
                   }
                 />
@@ -161,7 +161,7 @@ export const Trip: React.FC<ITripProps> = ({ trips, addBooking }) => {
                   max="10"
                   value={numberOfGuests}
                   required
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
                     changeInput(+e.target.value)
                   }
                 />

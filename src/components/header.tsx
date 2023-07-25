@@ -1,11 +1,12 @@
+import { FC } from 'react';
 import { Link } from "react-router-dom";
-import { Nav } from "./Nav";
+import { Nav } from "./nav";
 
 interface IHeaderProps {
   isLogin: boolean;
 }
 
-export const Header: React.FC<IHeaderProps> = ({ isLogin }) => {
+export const Header: FC<IHeaderProps> = ({ isLogin }) => {
   return (
     <header className="header">
       <div className="header__inner">

@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { IFilterProps } from "../interfaces/filter-props.interface";
 
-export const Filter: React.FC<IFilterProps> = ({
+export const Filter: FC<IFilterProps> = ({
   filterTrips,
   search,
   level,

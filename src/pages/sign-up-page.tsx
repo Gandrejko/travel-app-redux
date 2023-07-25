@@ -1,19 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Email } from "../components/Inputs/EmailInput";
-import { Password } from "../components/Inputs/Password";
-import { FullName } from "../components/Inputs/FullName";
-import { Dispatch, useEffect } from "react";
+import { Email } from "../components/inputs/email";
+import { Password } from "../components/inputs/password";
+import { FullName } from "../components/inputs/full-name";
+import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
-interface ISignUpProps {
+interface ISignUpPageProps {
   setIsLogin: Dispatch<boolean>;
 }
-export const SignUp: React.FC<ISignUpProps> = ({ setIsLogin }) => {
+export const SignUpPage: FC<ISignUpPageProps> = ({ setIsLogin }) => {
   useEffect(() => {
     setIsLogin(false);
   });
   const navigate = useNavigate();
 
-  const signUp = (e: React.SyntheticEvent) => {
+  const signUp = (e: SyntheticEvent) => {
     e.preventDefault();
     return navigate("/");
   };

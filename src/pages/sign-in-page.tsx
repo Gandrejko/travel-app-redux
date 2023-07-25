@@ -1,18 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Email } from "../components/Inputs/EmailInput";
-import { Password } from "../components/Inputs/Password";
-import { Dispatch, useEffect } from "react";
+import { Email } from "../components/inputs/email";
+import { Password } from "../components/inputs/password";
+import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
-interface ISignInProps {
+interface ISignInPageProps {
   setIsLogin: Dispatch<boolean>;
 }
-export const SignIn: React.FC<ISignInProps> = ({ setIsLogin }) => {
+export const SignInPage: FC<ISignInPageProps> = ({ setIsLogin }) => {
   useEffect(() => {
     setIsLogin(false);
   });
   const navigate = useNavigate();
 
-  const signIn = (e: React.SyntheticEvent): void => {
+  const signIn = (e: SyntheticEvent): void => {
     e.preventDefault();
     return navigate("/");
   };

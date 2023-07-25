@@ -1,11 +1,12 @@
-import { TripCard } from "./TripCard";
+import { FC } from 'react';
 import { ITrip } from "../interfaces/trip.interface";
+import { TripCard } from './trip-card';
 
 interface ITrips {
   trips: ITrip[];
 }
 
-export const Trips: React.FC<ITrips> = ({ trips }) => {
+export const Trips: FC<ITrips> = ({ trips }) => {
   return (
     <section className="trips">
       <h2 className="visually-hidden">Trips List</h2>

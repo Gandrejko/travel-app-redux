@@ -1,10 +1,10 @@
-import { Dispatch, useEffect } from "react";
-import { Filter } from "../components/Filter";
-import { Trips } from "../components/Trips";
+import { Dispatch, FC, useEffect } from "react";
+import { Filter } from "../components/filter";
+import { Trips } from "../components/trips";
 import { ITrip } from "../interfaces/trip.interface";
 import { IFilterTrips } from "../interfaces/filter-trips.interface";
 
-interface IMainProps {
+interface IMainPageProps {
   trips: ITrip[];
   search: string;
   level: string;
@@ -13,7 +13,7 @@ interface IMainProps {
   setIsLogin: Dispatch<boolean>;
 }
 
-export const Main: React.FC<IMainProps> = ({
+export const MainPage: FC<IMainPageProps> = ({
   trips,
   filterTrips,
   search,

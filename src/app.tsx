@@ -1,19 +1,19 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { Main } from "./pages/Main";
-import { Bookings } from "./pages/Bookings";
-import { SignIn } from "./pages/SignIn";
-import { SignUp } from "./pages/SignUp";
-import { Trip } from "./pages/Trip";
+import { Header } from "./components/header";
+import { Footer } from "./components/footer";
 import { useMemo, useState } from "react";
 import { defaultTrip as trips } from "./constants/default-values";
-import { filterByDuration } from "./helpers/filterByDuration";
-import { filterByLevel } from "./helpers/filterByLevel";
-import { filterBySearch } from "./helpers/filterBySearch";
-import { sortBookingsByDate } from "./helpers/sortBookingsByDate";
+import { filterByDuration } from './helpers/filter-by-duration';
+import { filterByLevel } from './helpers/filter-by-level';
+import { filterBySearch } from './helpers/filter-by-search';
+import { sortBookingsByDate } from './helpers/sort-bookings-by-date';
+import { useBookingList } from './hooks/use-booking-list';
+import { BookingsPage } from './pages/bookings-page';
+import { MainPage } from './pages/main-page';
+import { SignInPage } from './pages/sign-in-page';
+import { SignUpPage } from './pages/sign-up-page';
+import { TripPage } from './pages/trip-page';
 import { TRIP_ROUTE_PATTERN } from "./routes";
-import { useBookingList } from "./hooks/useBookingList";
 import { IBooking } from "./interfaces/booking.interface";
 import { IFilterTrips } from "./interfaces/filter-trips.interface";
 
@@ -74,7 +74,7 @@ function App() {
           <Route
             index
             element={
-              <Main
+              <MainPage
                 trips={filteredTrips}
                 filterTrips={filterTrips}
                 level={level}
@@ -87,14 +87,14 @@ function App() {
           <Route
             path="bookings"
             element={
-              <Bookings bookings={bookings} deleteBooking={deleteBooking} />
+              <BookingsPage bookings={bookings} deleteBooking={deleteBooking} />
             }
           />
-          <Route path="sign-in" element={<SignIn setIsLogin={setIsLogin} />} />
-          <Route path="sign-up" element={<SignUp setIsLogin={setIsLogin} />} />
+          <Route path="sign-in" element={<SignInPage setIsLogin={setIsLogin} />} />
+          <Route path="sign-up" element={<SignUpPage setIsLogin={setIsLogin} />} />
           <Route
             path={TRIP_ROUTE_PATTERN}
-            element={<Trip trips={filteredTrips} addBooking={addBooking} />}
+            element={<TripPage trips={filteredTrips} addBooking={addBooking} />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
