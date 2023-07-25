@@ -1,5 +1,5 @@
-import { ITrip } from "../interfaces/trip.interface";
-import { IBooking } from "../interfaces/booking.interface";
+import { ITrip } from "interfaces/trip.interface";
+import { IBooking } from "interfaces/booking.interface";
 
 export const defaultTrip: ITrip[] = [
   {

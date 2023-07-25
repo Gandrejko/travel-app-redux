@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { BookingCard } from "../components/booking-card";
-import { IBooking } from "../interfaces/booking.interface";
+import { BookingCard } from "components/booking-card";
+import { IBooking } from "interfaces/booking.interface";
 
 export interface IBookingsPageProps {
   bookings: IBooking[];

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ITrip } from "../interfaces/trip.interface";
+import { ITrip } from "interfaces/trip.interface";
 import { TripCard } from "./trip-card";
 
 interface ITrips {

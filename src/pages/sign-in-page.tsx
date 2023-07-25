@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { EmailInput } from "../components/inputs/email-input";
-import { PasswordInput } from "../components/inputs/password-input";
+import { EmailInput } from "components/inputs/email-input";
+import { PasswordInput } from "components/inputs/password-input";
 import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
 interface ISignInPageProps {

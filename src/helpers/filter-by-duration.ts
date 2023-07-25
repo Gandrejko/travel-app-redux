@@ -1,4 +1,4 @@
-import { ITrip } from "../interfaces/trip.interface";
+import { ITrip } from "interfaces/trip.interface";
 
 export const filterByDuration = (trips: ITrip[], duration: string): ITrip[] => {
   let min = 0,

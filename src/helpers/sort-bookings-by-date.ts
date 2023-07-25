@@ -1,4 +1,4 @@
-import { IBooking } from "../interfaces/booking.interface";
+import { IBooking } from "interfaces/booking.interface";
 
 export const sortBookingsByDate = (bookings: IBooking[]): IBooking[] => {
   return [...bookings].sort((a, b) => {

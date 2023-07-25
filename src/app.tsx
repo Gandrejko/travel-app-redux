@@ -1,21 +1,21 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Header } from "./components/header";
-import { Footer } from "./components/footer";
+import { Header } from "components/header";
+import { Footer } from "components/footer";
 import { useMemo, useState } from "react";
 import { defaultTrip as trips } from "./constants/default-values";
-import { filterByDuration } from './helpers/filter-by-duration';
-import { filterByLevel } from './helpers/filter-by-level';
-import { filterBySearch } from './helpers/filter-by-search';
-import { sortBookingsByDate } from './helpers/sort-bookings-by-date';
-import { useBookingList } from './hooks/use-booking-list';
-import { BookingsPage } from './pages/bookings-page';
-import { MainPage } from './pages/main-page';
-import { SignInPage } from './pages/sign-in-page';
-import { SignUpPage } from './pages/sign-up-page';
-import { TripPage } from './pages/trip-page';
-import { TRIP_ROUTE_PATTERN } from "./routes";
-import { IBooking } from "./interfaces/booking.interface";
-import { IFilterTrips } from "./interfaces/filter-trips.interface";
+import { filterByDuration } from "helpers/filter-by-duration";
+import { filterByLevel } from "helpers/filter-by-level";
+import { filterBySearch } from "helpers/filter-by-search";
+import { sortBookingsByDate } from "helpers/sort-bookings-by-date";
+import { useBookingList } from "hooks/use-booking-list";
+import { BookingsPage } from "pages/bookings-page";
+import { MainPage } from "pages/main-page";
+import { SignInPage } from "pages/sign-in-page";
+import { SignUpPage } from "pages/sign-up-page";
+import { TripPage } from "pages/trip-page";
+import { TRIP_ROUTE_PATTERN } from "routes";
+import { IBooking } from "interfaces/booking.interface";
+import { IFilterTrips } from "interfaces/filter-trips.interface";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -90,8 +90,14 @@ function App() {
               <BookingsPage bookings={bookings} deleteBooking={deleteBooking} />
             }
           />
-          <Route path="sign-in" element={<SignInPage setIsLogin={setIsLogin} />} />
-          <Route path="sign-up" element={<SignUpPage setIsLogin={setIsLogin} />} />
+          <Route
+            path="sign-in"
+            element={<SignInPage setIsLogin={setIsLogin} />}
+          />
+          <Route
+            path="sign-up"
+            element={<SignUpPage setIsLogin={setIsLogin} />}
+          />
           <Route
             path={TRIP_ROUTE_PATTERN}
             element={<TripPage trips={filteredTrips} addBooking={addBooking} />}

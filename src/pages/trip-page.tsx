@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
-import { Input } from "../components/inputs/input/input";
-import { TripTitle } from "../components/trip/trip-title";
-import { TripDuration } from "../components/trip/trip-duration";
-import { TripLevel } from "../components/trip/trip-level";
-import { TripPrice } from "../components/trip/trip-price";
-import { stringifyDate } from "../helpers/stringify-date";
-import { ITrip } from "../interfaces/trip.interface";
-import { IBooking } from "../interfaces/booking.interface";
+import { Input } from "components/inputs/input/input";
+import { TripTitle } from "components/trip/trip-title";
+import { TripDuration } from "components/trip/trip-duration";
+import { TripLevel } from "components/trip/trip-level";
+import { TripPrice } from "components/trip/trip-price";
+import { stringifyDate } from "helpers/stringify-date";
+import { ITrip } from "interfaces/trip.interface";
+import { IBooking } from "interfaces/booking.interface";
 import { v4 } from "uuid";
 
 interface ITripPageProps {

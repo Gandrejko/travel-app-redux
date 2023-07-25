@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { IFilterProps } from "../../interfaces/filter-props.interface";
-import { Input } from "../inputs/input/input";
+import { IFilterProps } from "interfaces/filter-props.interface";
+import { Input } from "components/inputs/input/input";
 
 import styles from "./style.module.css";
 

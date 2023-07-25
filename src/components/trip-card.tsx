@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC } from "react";
 import { generatePath, Link } from "react-router-dom";
 import { TripDuration } from "./trip/trip-duration";
 import { TripPrice } from "./trip/trip-price";
 import { TripLevel } from "./trip/trip-level";
 import { TripTitle } from "./trip/trip-title";
-import { TRIP_ROUTE_PATTERN } from "../routes";
-import { ITrip } from "../interfaces/trip.interface";
+import { TRIP_ROUTE_PATTERN } from "routes";
+import { ITrip } from "interfaces/trip.interface";
 
 export const TripCard: FC<ITrip> = ({
   id,

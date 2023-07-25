@@ -1,4 +1,4 @@
-import { ITrip } from "../interfaces/trip.interface";
+import { ITrip } from "interfaces/trip.interface";
 
 export const filterBySearch = (trips: ITrip[], search: string) => {
   return trips.filter(
