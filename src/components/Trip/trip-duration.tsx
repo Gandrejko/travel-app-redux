@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { ITripDuration } from '../../interfaces/trip.interface';
+import { FC } from "react";
+import { ITripDuration } from "../../interfaces/trip.interface";
 
 export const TripDuration: FC<ITripDuration> = ({ children }) => {
   return (

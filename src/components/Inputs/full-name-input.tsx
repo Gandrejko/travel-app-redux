@@ -1,4 +1,4 @@
-import { Input } from './input/input';
+import { Input } from "./input/input";
 
 export const FullNameInput = () => (
   <Input
@@ -6,7 +6,7 @@ export const FullNameInput = () => (
     name="full-name"
     type="text"
     required
-    labelText='Full name'
-    spanClassNames='input__heading'
+    labelText="Full name"
+    spanClassNames="input__heading"
   />
 );

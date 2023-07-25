@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { IFilterProps } from '../../interfaces/filter-props.interface';
-import { Input } from '../inputs/input/input';
+import { FC } from "react";
+import { IFilterProps } from "../../interfaces/filter-props.interface";
+import { Input } from "../inputs/input/input";
 
-import styles from './style.module.css';
+import styles from "./style.module.css";
 
 export const Filter: FC<IFilterProps> = ({
   filterTrips,

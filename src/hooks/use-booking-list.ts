@@ -1,4 +1,4 @@
-import { Dispatch } from 'react';
+import { Dispatch } from "react";
 import { useLocalStorage } from "./use-local-storage";
 import { defaultBooking } from "../constants/default-values";
 import { IBooking } from "../interfaces/booking.interface";

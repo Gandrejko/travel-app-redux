@@ -6,6 +6,7 @@ import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 interface ISignInPageProps {
   setIsLogin: Dispatch<boolean>;
 }
+
 export const SignInPage: FC<ISignInPageProps> = ({ setIsLogin }) => {
   useEffect(() => {
     setIsLogin(false);

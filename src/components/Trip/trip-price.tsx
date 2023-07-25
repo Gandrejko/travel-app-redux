@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { ITripPrice } from '../../interfaces/trip.interface';
+import { FC } from "react";
+import { ITripPrice } from "../../interfaces/trip.interface";
 
 export const TripPrice: FC<ITripPrice> = ({ children }) => {
   return (

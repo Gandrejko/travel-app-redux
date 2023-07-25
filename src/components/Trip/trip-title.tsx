@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { ITripTitle } from '../../interfaces/trip.interface';
+import { FC } from "react";
+import { ITripTitle } from "../../interfaces/trip.interface";
 
 export const TripTitle: FC<ITripTitle> = ({ children }) => {
   return (

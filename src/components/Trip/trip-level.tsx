@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { ITripLevel } from '../../interfaces/trip.interface';
+import { FC } from "react";
+import { ITripLevel } from "../../interfaces/trip.interface";
 
 export const TripLevel: FC<ITripLevel> = ({ children }) => {
   return (

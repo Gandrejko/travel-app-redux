@@ -1,4 +1,4 @@
-import { Input } from './input/input';
+import { Input } from "./input/input";
 
 export const PasswordInput = () => (
   <Input
@@ -9,7 +9,7 @@ export const PasswordInput = () => (
     maxLength={20}
     autoComplete="new-password"
     required
-    labelText='Password'
-    spanClassNames='input__heading'
+    labelText="Password"
+    spanClassNames="input__heading"
   />
 );

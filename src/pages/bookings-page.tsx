@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC } from "react";
 import { BookingCard } from "../components/booking-card";
 import { IBooking } from "../interfaces/booking.interface";
 
@@ -6,6 +6,7 @@ export interface IBookingsPageProps {
   bookings: IBooking[];
   deleteBooking: (id: string) => void;
 }
+
 export const BookingsPage: FC<IBookingsPageProps> = ({
   bookings,
   deleteBooking,
