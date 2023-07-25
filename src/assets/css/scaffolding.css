@@ -76,3 +76,8 @@ select {
 	clip: rect(0, 0, 0, 0);
 	clip-path: inset(50%);
 }
+
+.input__heading {
+	font-size: var(--font-size-100);
+	line-height: 1;
+}

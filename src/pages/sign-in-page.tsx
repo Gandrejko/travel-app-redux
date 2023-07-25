@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Email } from "../components/inputs/email";
-import { Password } from "../components/inputs/password";
+import { EmailInput } from "../components/inputs/email-input";
+import { PasswordInput } from "../components/inputs/password-input";
 import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
 interface ISignInPageProps {
@@ -22,8 +22,8 @@ export const SignInPage: FC<ISignInPageProps> = ({ setIsLogin }) => {
       <h1 className="visually-hidden">Travel App</h1>
       <form className="sign-in-form" autoComplete="off" onSubmit={signIn}>
         <h2 className="sign-in-form__title">Sign In</h2>
-        <Email />
-        <Password />
+        <EmailInput />
+        <PasswordInput />
         <button data-test-id="auth-submit" className="button" type="submit">
           Sign In
         </button>

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import { Input } from '../components/inputs/input/input';
 import { TripTitle } from "../components/trip/trip-title";
 import { TripDuration } from "../components/trip/trip-duration";
 import { TripLevel } from "../components/trip/trip-level";
@@ -139,33 +140,29 @@ export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
                   </span>
                 </div>
               </div>
-              <label className="input">
-                <span className="input__heading">Date</span>
-                <input
-                  data-test-id="book-trip-popup-date"
-                  name="date"
-                  type="date"
-                  required
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    setDate(e.target.value)
-                  }
-                />
-              </label>
-              <label className="input">
-                <span className="input__heading">Number of guests</span>
-                <input
-                  data-test-id="book-trip-popup-guests"
-                  name="guests"
-                  type="number"
-                  min="1"
-                  max="10"
-                  value={numberOfGuests}
-                  required
-                  onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                    changeInput(+e.target.value)
-                  }
-                />
-              </label>
+              <Input
+                data-test-id="book-trip-popup-date"
+                name="date"
+                type="date"
+                required
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setDate(e.target.value)
+                }
+                spanClassNames="input__heading"
+              />
+              <Input
+                data-test-id="book-trip-popup-guests"
+                name="guests"
+                type="number"
+                min="1"
+                max="10"
+                value={numberOfGuests}
+                required
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  changeInput(+e.target.value)
+                }
+                spanClassNames="input__heading"
+              />
               <span className="book-trip-popup__total">
                 Total:
                 <output

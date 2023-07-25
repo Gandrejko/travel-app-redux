@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { IFilterProps } from "../interfaces/filter-props.interface";
+import { IFilterProps } from '../../interfaces/filter-props.interface';
+import { Input } from '../inputs/input/input';
+
+import styles from './style.module.css';
 
 export const Filter: FC<IFilterProps> = ({
   filterTrips,
@@ -8,24 +11,25 @@ export const Filter: FC<IFilterProps> = ({
   duration,
 }) => {
   return (
-    <section className="trips-filter">
+    <section className={styles.tripsFilter}>
       <h2 className="visually-hidden">Trips filter</h2>
       <form
-        className="trips-filter__form"
+        className={styles.form}
         autoComplete="off"
         onSubmit={(e) => e.preventDefault()}
       >
-        <label className="trips-filter__search input">
-          <span className="visually-hidden">Search by name</span>
-          <input
-            data-test-id="filter-search"
-            name="search"
-            type="search"
-            value={search}
-            placeholder="search by title"
-            onChange={(e) => filterTrips({ search: e.target.value })}
-          />
-        </label>
+        <Input
+          labelText="Search by name"
+          name="search"
+          type="search"
+          value={search}
+          placeholder="search by title"
+          labelClassNames={styles.search}
+          spanClassNames="visually-hidden"
+          inputClassNames={styles.searchInput}
+          data-test-id="filter-search"
+          onChange={(e) => filterTrips({ search: e.target.value })}
+        />
         <label className="select">
           <span className="visually-hidden">Search by duration</span>
           <select

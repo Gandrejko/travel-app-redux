@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Email } from "../components/inputs/email";
-import { Password } from "../components/inputs/password";
-import { FullName } from "../components/inputs/full-name";
+import { EmailInput } from "../components/inputs/email-input";
+import { PasswordInput } from "../components/inputs/password-input";
+import { FullNameInput } from "../components/inputs/full-name-input";
 import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
 interface ISignUpPageProps {
@@ -22,9 +22,9 @@ export const SignUpPage: FC<ISignUpPageProps> = ({ setIsLogin }) => {
       <h1 className="visually-hidden">Travel App</h1>
       <form className="sign-up-form" autoComplete="off" onSubmit={signUp}>
         <h2 className="sign-up-form__title">Sign Up</h2>
-        <FullName />
-        <Email />
-        <Password />
+        <FullNameInput />
+        <EmailInput />
+        <PasswordInput />
         <button data-test-id="auth-submit" className="button" type="submit">
           Sign Up
         </button>

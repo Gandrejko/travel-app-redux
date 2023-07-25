@@ -31,36 +31,6 @@
 
 /* components */
 
-/* input */
-
-.input {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.input__heading {
-  font-size: var(--font-size-100);
-  line-height: 1;
-}
-
-.input input {
-  min-width: 160px;
-  min-height: 45px;
-  padding: 10px 15px;
-  font-size: var(--font-size-300);
-  background-color: var(--color-blue-100);
-  border: none;
-  border-radius: 1px;
-  cursor: pointer;
-  appearance: none;
-}
-
-.input input::placeholder {
-  color: var(--color-blue-400);
-  opacity: 0.4;
-}
-
 /* select */
 
 .select select {
@@ -332,39 +302,6 @@
 }
 
 /* main-page */
-
-/* trips-filter */
-
-.trips-filter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 180px;
-  padding: 20px;
-  background-color: var(--color-blue-400);
-}
-
-.trips-filter__form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 25px;
-  width: 100%;
-  max-width: var(--container-width);
-}
-
-.trips-filter__search {
-  width: 100%;
-  max-width: 350px;
-}
-
-.trips-filter__search input {
-  padding-left: 50px;
-  background-color: var(--color-white);
-  background-image: url('../images/search.svg');
-  background-repeat: no-repeat;
-  background-position: 15px 50%;
-  background-size: 22px;
-}
 
 /* trips */
 
