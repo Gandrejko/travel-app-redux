@@ -8,7 +8,7 @@ import { filterByLevel } from "helpers/filter-by-level";
 import { filterBySearch } from "helpers/filter-by-search";
 import { sortBookingsByDate } from "helpers/sort-bookings-by-date";
 import { useBookingList } from "hooks/use-booking-list";
-import { BookingsPage } from "pages/bookings-page";
+import { BookingsPage } from "pages/bookings-page/bookings-page";
 import { MainPage } from "pages/main-page";
 import { SignInPage } from "pages/sign-pages/sign-in-page";
 import { SignUpPage } from "pages/sign-pages/sign-up-page";

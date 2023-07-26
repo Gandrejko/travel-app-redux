@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { IBooking } from "interfaces/booking.interface";
 
+import styles from "./style.module.css";
+
 export interface IBookingCardProps extends IBooking {
   onClick: (id: string) => void;
 }
@@ -14,22 +16,18 @@ export const BookingCard: FC<IBookingCardProps> = ({
   onClick,
 }) => {
   return (
-    <li data-test-id="booking" className="booking">
-      <h3 data-test-id="booking-title" className="booking__title">
+    <li data-test-id="booking" className={styles.booking}>
+      <h3 data-test-id="booking-title" className={styles.bookingTitle}>
         {title}
       </h3>
-      <span data-test-id="booking-guests" className="booking__guests">
-        {guests} guests
-      </span>
-      <span data-test-id="booking-date" className="booking__date">
+      <span data-test-id="booking-guests">{guests} guests</span>
+      <span data-test-id="booking-date">
         {date.match(/\d\d\d\d-\d\d-\d\d/)}
       </span>
-      <span data-test-id="booking-total" className="booking__total">
-        {totalPrice} $
-      </span>
+      <span data-test-id="booking-total">{totalPrice} $</span>
       <button
         data-test-id="booking-cancel"
-        className="booking__cancel"
+        className={styles.bookingCancel}
         title="Cancel booking"
         onClick={() => onClick(id)}
       >
