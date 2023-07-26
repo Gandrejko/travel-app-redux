@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { Nav } from "./nav";
+import { Nav } from "components/nav/nav";
+
+import styles from "./style.module.css";
 
 interface IHeaderProps {
   isLogin: boolean;
@@ -8,12 +10,12 @@ interface IHeaderProps {
 
 export const Header: FC<IHeaderProps> = ({ isLogin }) => {
   return (
-    <header className="header">
-      <div className="header__inner">
+    <header className={styles.header}>
+      <div className={styles.headerInner}>
         <Link
           data-test-id="header-logo"
           to={isLogin ? "/" : "/sign-in"}
-          className="header__logo"
+          className={styles.headerLogo}
         >
           Travel App
         </Link>

@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Header } from "components/header";
+import { Header } from "components/header/header";
 import { Footer } from "components/footer";
 import { useMemo, useState } from "react";
 import { defaultTrip as trips } from "./constants/default-values";

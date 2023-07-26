@@ -1,43 +1,45 @@
 import { Link } from "react-router-dom";
-import { ReactComponent as Briefcase } from "../assets/images/briefcase.svg";
-import { ReactComponent as User } from "../assets/images/user.svg";
+import { ReactComponent as Briefcase } from "assets/images/briefcase.svg";
+import { ReactComponent as User } from "assets/images/user.svg";
+
+import styles from "./style.module.css";
 
 export const Nav = () => (
-  <nav data-test-id="header-nav" className="header__nav">
-    <ul className="nav-header__list">
-      <li className="nav-header__item" title="Bookings">
+  <nav data-test-id="header-nav" className={styles.nav}>
+    <ul className={styles.navList}>
+      <li className={styles.navItem} title="Bookings">
         <Link
           data-test-id="header-bookings-link"
           to="bookings"
-          className="nav-header__inner"
+          className={styles.navInner}
         >
           <span className="visually-hidden">Bookings</span>
           <Briefcase />
         </Link>
       </li>
-      <li className="nav-header__item" title="Profile">
+      <li className={styles.navItem} title="Profile">
         <div
           data-test-id="header-profile-nav"
-          className="nav-header__inner profile-nav"
+          className={`${styles.navInner} ${styles.profileNav}`}
           tabIndex={0}
         >
           <span className="visually-hidden">Profile</span>
           <User />
           <ul
             data-test-id="header-profile-nav-list"
-            className="profile-nav__list"
+            className={styles.profileNavList}
           >
             <li
               data-test-id="header-profile-nav-username"
-              className="profile-nav__item profile-nav__username"
+              className={styles.profileNavItem}
             >
               John Doe
             </li>
-            <li className="profile-nav__item">
+            <li className={styles.profileNavItem}>
               <Link
                 data-test-id="header-profile-nav-sign-out"
                 to="sign-in"
-                className="profile-nav__sign-out button"
+                className={`${styles.profileNavSignOut} button`}
               >
                 Sign Out
               </Link>

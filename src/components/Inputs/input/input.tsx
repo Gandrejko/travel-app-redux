@@ -1,5 +1,5 @@
 import { FC, InputHTMLAttributes } from "react";
-import { mergeClassnames } from "../../../helpers/merge-classnames";
+import { mergeClassnames } from "helpers/merge-classnames";
 import styles from "./style.module.css";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
