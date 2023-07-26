@@ -4,6 +4,8 @@ import { PasswordInput } from "components/inputs/password-input";
 import { FullNameInput } from "components/inputs/full-name-input";
 import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
+import styles from "./style.module.css";
+
 interface ISignUpPageProps {
   setIsLogin: Dispatch<boolean>;
 }
@@ -19,10 +21,10 @@ export const SignUpPage: FC<ISignUpPageProps> = ({ setIsLogin }) => {
     return navigate("/");
   };
   return (
-    <main className="sign-up-page">
+    <main className={styles.signPage}>
       <h1 className="visually-hidden">Travel App</h1>
-      <form className="sign-up-form" autoComplete="off" onSubmit={signUp}>
-        <h2 className="sign-up-form__title">Sign Up</h2>
+      <form className={styles.form} autoComplete="off" onSubmit={signUp}>
+        <h2 className={styles.formTitle}>Sign Up</h2>
         <FullNameInput />
         <EmailInput />
         <PasswordInput />
@@ -35,7 +37,7 @@ export const SignUpPage: FC<ISignUpPageProps> = ({ setIsLogin }) => {
         <Link
           data-test-id="auth-sign-in-link"
           to="/sign-in"
-          className="sign-up-form__link"
+          className={styles.formLink}
         >
           Sign In
         </Link>

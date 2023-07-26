@@ -3,6 +3,8 @@ import { EmailInput } from "components/inputs/email-input";
 import { PasswordInput } from "components/inputs/password-input";
 import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
 
+import styles from "./style.module.css";
+
 interface ISignInPageProps {
   setIsLogin: Dispatch<boolean>;
 }
@@ -19,10 +21,10 @@ export const SignInPage: FC<ISignInPageProps> = ({ setIsLogin }) => {
   };
 
   return (
-    <main className="sign-in-page">
+    <main className={styles.signPage}>
       <h1 className="visually-hidden">Travel App</h1>
-      <form className="sign-in-form" autoComplete="off" onSubmit={signIn}>
-        <h2 className="sign-in-form__title">Sign In</h2>
+      <form className={styles.form} autoComplete="off" onSubmit={signIn}>
+        <h2 className={styles.formTitle}>Sign In</h2>
         <EmailInput />
         <PasswordInput />
         <button data-test-id="auth-submit" className="button" type="submit">
@@ -34,7 +36,7 @@ export const SignInPage: FC<ISignInPageProps> = ({ setIsLogin }) => {
         <Link
           data-test-id="auth-sign-up-link"
           to="/sign-up"
-          className="sign-in-form__link"
+          className={styles.formLink}
         >
           Sign Up
         </Link>
