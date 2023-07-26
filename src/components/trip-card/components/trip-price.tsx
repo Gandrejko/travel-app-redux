@@ -1,13 +1,15 @@
 import { FC } from "react";
 import { ITripPrice } from "interfaces/trip.interface";
 
+import styles from "../style.module.css";
+
 export const TripPrice: FC<ITripPrice> = ({ children }) => {
   return (
-    <div className="trip-price">
+    <div>
       <span>Price</span>
       <strong
         data-test-id="trip-details-price-value"
-        className="trip-price__value"
+        className={styles.tripPriceValue}
       >
         {children} $
       </strong>

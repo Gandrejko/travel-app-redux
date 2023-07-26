@@ -12,7 +12,7 @@ import { BookingsPage } from "pages/bookings-page/bookings-page";
 import { MainPage } from "pages/main-page";
 import { SignInPage } from "pages/sign-pages/sign-in-page";
 import { SignUpPage } from "pages/sign-pages/sign-up-page";
-import { TripPage } from "pages/trip-page";
+import { TripPage } from "pages/trip-page/trip-page";
 import { TRIP_ROUTE_PATTERN } from "routes";
 import { IBooking } from "interfaces/booking.interface";
 import { IFilterTrips } from "interfaces/filter-trips.interface";

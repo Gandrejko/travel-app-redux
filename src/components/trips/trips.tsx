@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { ITrip } from "interfaces/trip.interface";
-import { TripCard } from "./trip-card";
+import { TripCard } from "components/trip-card/trip-card";
+
+import styles from "./style.module.css";
 
 interface ITrips {
   trips: ITrip[];
@@ -8,9 +10,9 @@ interface ITrips {
 
 export const Trips: FC<ITrips> = ({ trips }) => {
   return (
-    <section className="trips">
+    <section className={styles.trips}>
       <h2 className="visually-hidden">Trips List</h2>
-      <ul className="trip-list">
+      <ul className={styles.tripList}>
         {trips.map((trip) => (
           <TripCard key={trip.id} {...trip} />
         ))}

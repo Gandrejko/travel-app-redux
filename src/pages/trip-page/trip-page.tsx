@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
-import { TripTitle } from "components/trip/trip-title";
-import { TripDuration } from "components/trip/trip-duration";
-import { TripLevel } from "components/trip/trip-level";
-import { TripPrice } from "components/trip/trip-price";
+import { TripTitle } from "components/trip-card/components/trip-title";
+import { TripDuration } from "components/trip-card/components/trip-duration";
+import { TripLevel } from "components/trip-card/components/trip-level";
+import { TripPrice } from "components/trip-card/components/trip-price";
 import { stringifyDate } from "helpers/stringify-date";
 import { ITrip } from "interfaces/trip.interface";
 import { IBooking } from "interfaces/booking.interface";
 import { v4 } from "uuid";
+
+import styles from "./style.module.css";
 
 interface ITripPageProps {
   trips: ITrip[];
@@ -67,33 +69,33 @@ export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
   };
   return (
     <>
-      <main className="trip-page">
+      <main className={styles.tripPage}>
         <h1 className="visually-hidden">Travel App</h1>
-        <div className="trip">
+        <div className={styles.trip}>
           <img
             data-test-id="trip-details-image"
             src={image}
-            className="trip__img"
+            className={styles.tripImg}
             alt="trip"
           />
-          <div className="trip__content">
-            <div className="trip-info">
+          <div className={styles.tripContent}>
+            <div className={styles.tripInfo}>
               <TripTitle>{title}</TripTitle>
-              <div className="trip-info__content">
+              <div className={styles.tripInfoContent}>
                 <TripDuration>{duration}</TripDuration>
                 <TripLevel>{level}</TripLevel>
               </div>
             </div>
             <div
               data-test-id="trip-details-description"
-              className="trip__description"
+              className={styles.tripDescription}
             >
               {description}
             </div>
             <TripPrice>{price}</TripPrice>
             <button
               data-test-id="trip-details-button"
-              className="trip__button button"
+              className={`${styles.tripButton} button`}
               onClick={() => setModalHide(false)}
             >
               Book a trip
@@ -116,23 +118,23 @@ export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
               autoComplete="off"
               onSubmit={createBooking}
             >
-              <div className="trip-info">
+              <div className={styles.tripInfo}>
                 <h3
                   data-test-id="book-trip-popup-title"
-                  className="trip-info__title"
+                  className={styles.tripInfoTitle}
                 >
                   {title}
                 </h3>
-                <div className="trip-info__content">
+                <div className={styles.tripInfoContent}>
                   <span
                     data-test-id="book-trip-popup-duration"
-                    className="trip-info__duration"
+                    className={styles.tripInfoDuration}
                   >
                     <strong>{duration}</strong> days
                   </span>
                   <span
                     data-test-id="book-trip-popup-level"
-                    className="trip-info__level"
+                    className={styles.tripInfoLevel}
                   >
                     {level}
                   </span>

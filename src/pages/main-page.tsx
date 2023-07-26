@@ -1,6 +1,6 @@
 import { Dispatch, FC, useEffect } from "react";
 import { Filter } from "components/filter/filter";
-import { Trips } from "components/trips";
+import { Trips } from "components/trips/trips";
 import { ITrip } from "interfaces/trip.interface";
 import { IFilterTrips } from "interfaces/filter-trips.interface";
 
