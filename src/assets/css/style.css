@@ -1,35 +1,6 @@
-/* Table of contents
-
-- variables
-- scaffolding
-- components
-  - input
-  - select
-  - button
-  - modal
-  - loader
-  - trip-info
-  - trip-price
-- layout
-  - header
-  - profile-nav
-  - footer
-- pages
-  - sign-up/sign-in pages
-  - main-page
-    - trips-filter
-    - trips
-  - trip-page
-    - book-trip-popup
-  - bookings-page
-- animations
-
-*/
 @import url('variables.css');
 @import url('scaffolding.css');
 @import url('animations.css');
-
-/* components */
 
 /* select */
 
@@ -94,10 +65,6 @@
 	border-radius: 50%;
 	animation: rotate 1.2s infinite linear;
 }
-
-/* pages */
-
-/* main-page */
 
 /* book-trip-popup */
 
