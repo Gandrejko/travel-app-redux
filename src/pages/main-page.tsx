@@ -1,28 +1,35 @@
-import { Dispatch, FC, useEffect } from "react";
+import { defaultTrip as trips } from "constants/default-values";
+import { filterByDuration } from "helpers/filter-by-duration";
+import { filterByLevel } from "helpers/filter-by-level";
+import { filterBySearch } from "helpers/filter-by-search";
+import { Dispatch, FC, useEffect, useMemo, useState } from "react";
 import { Filter } from "components/filter/filter";
 import { Trips } from "components/trips/trips";
-import { ITrip } from "interfaces/trip.interface";
-import { IFilterTrips } from "interfaces/filter-trips.interface";
 
 interface IMainPageProps {
-  trips: ITrip[];
-  search: string;
-  level: string;
-  duration: string;
-  filterTrips: ({ search, level, duration }: IFilterTrips) => void;
   setIsLogin: Dispatch<boolean>;
 }
 
-export const MainPage: FC<IMainPageProps> = ({
-  trips,
-  filterTrips,
-  search,
-  level,
-  duration,
-  setIsLogin,
-}) => {
+export const MainPage: FC<IMainPageProps> = ({ setIsLogin }) => {
+  const [search, setSearch] = useState("");
+  const [duration, setDuration] = useState("");
+  const [level, setLevel] = useState("");
+
+  const filteredTrips = useMemo(() => {
+    let newTrips = trips;
+    if (search) {
+      newTrips = filterBySearch(trips, search);
+    }
+    if (duration) {
+      newTrips = filterByDuration(newTrips, duration);
+    }
+    if (level) {
+      newTrips = filterByLevel(newTrips, level);
+    }
+    return newTrips;
+  }, [search, duration, level]);
+
   useEffect(() => {
-    filterTrips({ search: "", level: "", duration: "" });
     setIsLogin(true);
   }, []);
 
@@ -30,12 +37,14 @@ export const MainPage: FC<IMainPageProps> = ({
     <main>
       <h1 className="visually-hidden">Travel App</h1>
       <Filter
-        filterTrips={filterTrips}
         search={search}
         level={level}
         duration={duration}
+        setSearch={setSearch}
+        setLevel={setLevel}
+        setDuration={setDuration}
       />
-      <Trips trips={trips} />
+      <Trips trips={filteredTrips} />
     </main>
   );
 };

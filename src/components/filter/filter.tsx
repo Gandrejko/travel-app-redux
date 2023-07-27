@@ -1,14 +1,24 @@
-import { FC } from "react";
-import { IFilterProps } from "interfaces/filter-props.interface";
+import { Dispatch, FC, SetStateAction } from "react";
 import { Input } from "components/inputs/input/input";
 
 import styles from "./style.module.css";
 
+interface IFilterProps {
+  search: string;
+  level: string;
+  duration: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+  setLevel: Dispatch<SetStateAction<string>>;
+  setDuration: Dispatch<SetStateAction<string>>;
+}
+
 export const Filter: FC<IFilterProps> = ({
-  filterTrips,
   search,
   level,
   duration,
+  setSearch,
+  setLevel,
+  setDuration,
 }) => {
   return (
     <section className={styles.tripsFilter}>
@@ -28,7 +38,7 @@ export const Filter: FC<IFilterProps> = ({
           spanClassNames="visually-hidden"
           inputClassNames={styles.searchInput}
           data-test-id="filter-search"
-          onChange={(e) => filterTrips({ search: e.target.value })}
+          onChange={(e) => setSearch(e.target.value)}
         />
         <label className="select">
           <span className="visually-hidden">Search by duration</span>
@@ -36,7 +46,7 @@ export const Filter: FC<IFilterProps> = ({
             data-test-id="filter-duration"
             name="duration"
             value={duration}
-            onChange={(e) => filterTrips({ duration: e.target.value })}
+            onChange={(e) => setDuration(e.target.value)}
           >
             <option value="">duration</option>
             <option value="0_x_5">&lt; 5 days</option>
@@ -50,7 +60,7 @@ export const Filter: FC<IFilterProps> = ({
             value={level}
             data-test-id="filter-level"
             name="level"
-            onChange={(e) => filterTrips({ level: e.target.value })}
+            onChange={(e) => setLevel(e.target.value)}
           >
             <option value="">level</option>
             <option value="easy">easy</option>
