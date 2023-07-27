@@ -1,10 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
-import { TripTitle } from "components/trip-card/components/trip-title";
-import { TripDuration } from "components/trip-card/components/trip-duration";
-import { TripLevel } from "components/trip-card/components/trip-level";
-import { TripPrice } from "components/trip-card/components/trip-price";
 import { stringifyDate } from "helpers/stringify-date";
 import { ITrip } from "interfaces/trip.interface";
 import { IBooking } from "interfaces/booking.interface";
@@ -80,10 +76,25 @@ export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
           />
           <div className={styles.tripContent}>
             <div className={styles.tripInfo}>
-              <TripTitle>{title}</TripTitle>
+              <h3
+                data-test-id="trip-details-title"
+                className="trip-info__title"
+              >
+                Iceland
+              </h3>
               <div className={styles.tripInfoContent}>
-                <TripDuration>{duration}</TripDuration>
-                <TripLevel>{level}</TripLevel>
+                <span
+                  data-test-id="trip-details-duration"
+                  className={styles.tripInfoDuration}
+                >
+                  <strong>{duration}</strong> days
+                </span>
+                <span
+                  data-test-id="trip-details-level"
+                  className={styles.tripInfoLevel}
+                >
+                  {level}
+                </span>
               </div>
             </div>
             <div
@@ -92,7 +103,15 @@ export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
             >
               {description}
             </div>
-            <TripPrice>{price}</TripPrice>
+            <div>
+              <span>Price</span>
+              <strong
+                data-test-id="trip-details-price-value"
+                className={styles.tripPriceValue}
+              >
+                {price} $
+              </strong>
+            </div>
             <button
               data-test-id="trip-details-button"
               className={`${styles.tripButton} button`}

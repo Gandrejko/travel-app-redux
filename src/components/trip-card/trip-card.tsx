@@ -1,9 +1,5 @@
 import { FC } from "react";
 import { generatePath, Link } from "react-router-dom";
-import { TripDuration } from "./components/trip-duration";
-import { TripPrice } from "./components/trip-price";
-import { TripLevel } from "./components/trip-level";
-import { TripTitle } from "./components/trip-title";
 import { TRIP_ROUTE_PATTERN } from "routes";
 import { ITrip } from "interfaces/trip.interface";
 
@@ -27,13 +23,33 @@ export const TripCard: FC<ITrip> = ({
       />
       <div className={styles.tripCardContent}>
         <div className={styles.tripInfo}>
-          <TripTitle>{title}</TripTitle>
+          <h3 data-test-id="trip-card-title" className={styles.tripInfoTitle}>
+            {title}
+          </h3>
           <div className={styles.tripInfoContent}>
-            <TripDuration>{duration}</TripDuration>
-            <TripLevel>{level}</TripLevel>
+            <span
+              data-test-id="trip-card-duration"
+              className={styles.tripInfoDuration}
+            >
+              <strong>{duration}</strong> days
+            </span>
+            <span
+              data-test-id="trip-card-level"
+              className={styles.tripInfoLevel}
+            >
+              {level}
+            </span>
           </div>
         </div>
-        <TripPrice>{price}</TripPrice>
+        <div>
+          <span>Price</span>
+          <strong
+            data-test-id="trip-card-price-value"
+            className={styles.tripPriceValue}
+          >
+            {price} $
+          </strong>
+        </div>
       </div>
       <Link
         data-test-id="trip-card-link"
