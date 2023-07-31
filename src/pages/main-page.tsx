@@ -1,4 +1,5 @@
 import { useGetAuthenticatedUserQuery, useGetTripsQuery } from 'api/api';
+import { Loader } from 'components/loader/loader';
 import { filterByDuration } from "helpers/filter-by-duration";
 import { filterByLevel } from "helpers/filter-by-level";
 import { filterBySearch } from "helpers/filter-by-search";
@@ -10,14 +11,13 @@ import { useNavigate } from 'react-router-dom';
 export const MainPage: FC = () => {
   const navigate = useNavigate();
   const { isError } = useGetAuthenticatedUserQuery('');
-  const { data: trips } = useGetTripsQuery();
-  const [search, setSearch] = useState("");
-  const [duration, setDuration] = useState("");
-  const [level, setLevel] = useState("");
-
   if(isError) {
     navigate('/sign-in');
   }
+  const { data: trips, isLoading } = useGetTripsQuery();
+  const [search, setSearch] = useState("");
+  const [duration, setDuration] = useState("");
+  const [level, setLevel] = useState("");
 
   const filteredTrips = useMemo(() => {
     let newTrips = trips || [];
@@ -44,7 +44,8 @@ export const MainPage: FC = () => {
         setLevel={setLevel}
         setDuration={setDuration}
       />
-      <Trips trips={filteredTrips} />
+      {isLoading && <Loader />}
+      {trips && <Trips trips={filteredTrips} />}
     </main>
   );
 };
