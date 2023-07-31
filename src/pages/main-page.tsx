@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 export const MainPage: FC = () => {
   const navigate = useNavigate();
   const { isError } = useGetAuthenticatedUserQuery('');
-  const { data: trips } = useGetTripsQuery([]);
+  const { data: trips } = useGetTripsQuery();
   const [search, setSearch] = useState("");
   const [duration, setDuration] = useState("");
   const [level, setLevel] = useState("");

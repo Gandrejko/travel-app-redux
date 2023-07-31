@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type Page = {
-  fullName: string;
   email: string;
   password: string;
 }
 
 const initialState: Page = {
-  fullName: '',
   email: '',
   password: ''
 }

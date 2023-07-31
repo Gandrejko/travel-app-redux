@@ -1,27 +1,22 @@
-import { useGetTripByIdQuery } from 'api/api';
+import { useCreateBookingMutation, useGetAuthenticatedUserQuery, useGetTripByIdQuery } from 'api/api';
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
-import { stringifyDate } from "helpers/stringify-date";
-import { IBooking } from "interfaces/booking.interface";
-import { v4 } from "uuid";
 
 import styles from "./style.module.css";
 
-interface ITripPageProps {
-  addBooking: (booking: IBooking) => void;
-}
-
-export const TripPage: FC<ITripPageProps> = ({ addBooking }) => {
+export const TripPage: FC = () => {
   const { tripId } = useParams();
-  const { data: trip } = useGetTripByIdQuery(tripId);
+  const { data: trip } = useGetTripByIdQuery(tripId || '');
   const { description, duration, id, image, level, price, title } = trip || {};
 
+  const [bookingMut, data] = useCreateBookingMutation();
+
   const [modalHide, setModalHide] = useState(true);
-  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [numberOfGuests, setNumberOfGuests] = useState(0);
   const [totalPrice, setTotalPrice] = useState(price || 0);
   const [date, setDate] = useState<string>();
-  const [userId] = useState("1dd97a12-848f-4a1d-8a7d-34a2132fca94");
+  const { data: user } = useGetAuthenticatedUserQuery('');
 
   const changeInput = (value: number) => {
     let newValue;
@@ -34,10 +29,10 @@ export const TripPage: FC<ITripPageProps> = ({ addBooking }) => {
     }
 
     setNumberOfGuests(newValue);
-    setTotalPrice(newValue * price);
+    price && setTotalPrice(newValue * price);
   };
 
-  const createBooking = (e: SyntheticEvent) => {
+  const createBooking = async (e: SyntheticEvent) => {
     e.preventDefault();
     const dateInFuture =
       date && new Date(date).getTime() > new Date().getTime();
@@ -45,20 +40,12 @@ export const TripPage: FC<ITripPageProps> = ({ addBooking }) => {
       return;
     }
     const newBooking = {
-      id: v4(),
-      userId: userId,
+      userId: user.id,
       tripId: id,
       guests: numberOfGuests,
       date: date,
-      trip: {
-        title: title,
-        duration: duration,
-        price: price,
-      },
-      totalPrice: totalPrice,
-      createdAt: stringifyDate(new Date()),
     };
-    addBooking(newBooking);
+    await bookingMut(newBooking);
     setModalHide(true);
   };
   return (

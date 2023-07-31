@@ -5,7 +5,7 @@ import { ITrip } from 'interfaces/trip.interface';
 type TripsState = {
   trips: ITrip[],
 };
-export const tripSlice = createSlice({
+export const tripsSlice = createSlice({
   name: "trips",
   initialState: { trips: [] } as TripsState,
   reducers: {},
@@ -13,10 +13,11 @@ export const tripSlice = createSlice({
     builder.addMatcher(
       api.endpoints.getTrips.matchFulfilled,
       (state, { payload }) => {
+        // @ts-ignore
         state.trips = payload.data;
       }
     );
   }
 });
 
-export default tripSlice.reducer;
+export default tripsSlice.reducer;

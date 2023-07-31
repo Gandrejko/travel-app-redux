@@ -1,20 +1,20 @@
+import { useDeleteBookingMutation } from 'api/api';
 import { FC } from "react";
 import { IBooking } from "interfaces/booking.interface";
 
 import styles from "./style.module.css";
 
-export interface IBookingCardProps extends IBooking {
-  onClick: (id: string) => void;
-}
-
-export const BookingCard: FC<IBookingCardProps> = ({
+export const BookingCard: FC<IBooking> = ({
   id,
   guests,
   date,
   trip: { title },
   totalPrice,
-  onClick,
 }) => {
+  const [bookingMut] = useDeleteBookingMutation();
+  const deleteBooking = async () => {
+    await bookingMut(id);
+  };
   return (
     <li data-test-id="booking" className={styles.booking}>
       <h3 data-test-id="booking-title" className={styles.bookingTitle}>
@@ -29,7 +29,7 @@ export const BookingCard: FC<IBookingCardProps> = ({
         data-test-id="booking-cancel"
         className={styles.bookingCancel}
         title="Cancel booking"
-        onClick={() => onClick(id)}
+        onClick={deleteBooking}
       >
         <span className="visually-hidden">Cancel booking</span>×
       </button>

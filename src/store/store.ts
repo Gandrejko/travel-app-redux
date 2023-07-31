@@ -2,16 +2,18 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { api } from 'api/api';
 import { authSlice } from 'store/reducers/auth';
+import { bookingsSlice } from 'store/reducers/bookings';
 import { signInPageSlice } from 'store/reducers/sign-in-page';
 import { signUpPageSlice } from 'store/reducers/sign-up-page';
-import { tripSlice } from 'store/reducers/trips';
+import { tripsSlice } from 'store/reducers/trips';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   [authSlice.name]: authSlice.reducer,
   [signUpPageSlice.name]: signUpPageSlice.reducer,
   [signInPageSlice.name]: signInPageSlice.reducer,
-  [tripSlice.name]: tripSlice.reducer,
+  [tripsSlice.name]: tripsSlice.reducer,
+  [bookingsSlice.name]: bookingsSlice.reducer,
 });
 
 export const store = configureStore({

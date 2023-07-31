@@ -1,4 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IBooking } from 'interfaces/booking.interface';
+import { ITrip } from 'interfaces/trip.interface';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://binary-travel-app.xyz/api/v1/',
@@ -12,6 +14,7 @@ const baseQuery = fetchBaseQuery({
 
 export const api = createApi({
   reducerPath: "api",
+  tagTypes: ['booking'],
   baseQuery,
   endpoints: (builder) => ({
     getAuthenticatedUser: builder.query({
@@ -31,11 +34,33 @@ export const api = createApi({
         body: requestBody,
       }),
     }),
-    getTrips: builder.query({
+    getTrips: builder.query<ITrip[], void>({
       query: () => ({ url: 'trips' })
     }),
-    getTripById: builder.query({
+    getTripById: builder.query<ITrip, string>({
       query: (tripId) => ({ url: `trips/${tripId}` })
+    }),
+    getBookings: builder.query<IBooking[], void>({
+      query: () => ({ url: 'bookings' }),
+      providesTags: (result) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'booking' as const, id })), 'booking']
+          : ['booking'],
+    }),
+    createBooking: builder.mutation({
+      query: (requestBody) => ({
+        url: "bookings",
+        method: "POST",
+        body: requestBody,
+      }),
+      invalidatesTags: ['booking'],
+    }),
+    deleteBooking: builder.mutation({
+      query: (id) => ({
+        url: `bookings/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ['booking'],
     }),
   })
 });
@@ -46,4 +71,7 @@ export const {
   useSignInMutation,
   useGetTripsQuery,
   useGetTripByIdQuery,
+  useGetBookingsQuery,
+  useCreateBookingMutation,
+  useDeleteBookingMutation,
 } = api;
