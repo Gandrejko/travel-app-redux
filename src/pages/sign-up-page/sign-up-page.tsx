@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { EmailInput } from "components/inputs/email-input";
 import { PasswordInput } from "components/inputs/password-input";
 import { FullNameInput } from "components/inputs/full-name-input";
-import { Dispatch, FC, SyntheticEvent, useEffect } from "react";
+import { FC, SyntheticEvent } from "react";
+import { toast, ToastContainer } from 'react-toastify';
 import { signUpPageSlice } from 'store/reducers/sign-up-page';
 import { AppDispatch, RootState } from 'store/store';
 
@@ -42,37 +43,41 @@ const SignUpPassword = connect(
 )(PasswordInput);
 
 export const SignUpPage: FC = () => {
-  const [signUpMut, data] = useSignUpMutation();
+  const [signUpMut] = useSignUpMutation();
   const pageData = useAppSelector((state) => state.signUpPage);
   const navigate = useNavigate();
-
-  if(data?.data?.token) {
-    localStorage.setItem('token', data?.data?.token);
-  }
-  const token = localStorage.getItem('token');
-  if(token) {
-    navigate("/");
-  }
 
   const signUp = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await signUpMut(pageData);
+    // @ts-ignore
+    const { data, error } = await signUpMut(pageData);
+    if(data?.token) {
+      localStorage.setItem('token', data?.token);
+      navigate("/");
+    }
+    if(error) {
+      toast.error(error.data.message, {
+        className: 'notification'
+      });
+    }
   };
 
   return (
-    <main className={styles.signPage}>
-      <h1 className="visually-hidden">Travel App</h1>
-      <form className={styles.form} autoComplete="off" onSubmit={signUp}>
-        <h2 className={styles.formTitle}>Sign Up</h2>
-        <SignUpFullName />
-        <SignUpEmail />
-        <SignUpPassword />
-        <button data-test-id="auth-submit" className="button" type="submit">
-          Sign Up
-        </button>
-      </form>
-      <span>
+    <>
+      <ToastContainer />
+      <main className={styles.signPage}>
+        <h1 className="visually-hidden">Travel App</h1>
+        <form className={styles.form} autoComplete="off" onSubmit={signUp}>
+          <h2 className={styles.formTitle}>Sign Up</h2>
+          <SignUpFullName />
+          <SignUpEmail />
+          <SignUpPassword />
+          <button data-test-id="auth-submit" className="button" type="submit">
+            Sign Up
+          </button>
+        </form>
+        <span>
         Already have an account?
         <Link
           data-test-id="auth-sign-in-link"
@@ -82,6 +87,7 @@ export const SignUpPage: FC = () => {
           Sign In
         </Link>
       </span>
-    </main>
+      </main>
+    </>
   );
 };

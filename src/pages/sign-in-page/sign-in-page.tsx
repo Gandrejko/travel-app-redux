@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { EmailInput } from "components/inputs/email-input";
 import { PasswordInput } from "components/inputs/password-input";
 import { FC, SyntheticEvent } from "react";
+import { toast, ToastContainer } from 'react-toastify';
 import { signInPageSlice } from 'store/reducers/sign-in-page';
 import { AppDispatch, RootState } from 'store/store';
 
@@ -31,36 +32,40 @@ const SignInPassword = connect(
 )(PasswordInput);
 
 export const SignInPage: FC = () => {
-  const [signInMut, data] = useSignInMutation();
+  const [signInMut] = useSignInMutation();
   const pageData = useAppSelector((state) => state.signInPage);
   const navigate = useNavigate();
-
-  if(data?.data?.token) {
-    localStorage.setItem('token', data?.data?.token);
-  }
-  const token = localStorage.getItem('token');
-  if(token) {
-    navigate("/");
-  }
 
   const signIn = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await signInMut(pageData);
+    // @ts-ignore
+    const { data, error } = await signInMut(pageData);
+    if(data?.token) {
+      localStorage.setItem('token', data?.token);
+      navigate("/");
+    }
+    if(error) {
+      toast.error('User with this email is not authorized', {
+        className: 'notification'
+      });
+    }
   };
 
   return (
-    <main className={styles.signPage}>
-      <h1 className="visually-hidden">Travel App</h1>
-      <form className={styles.form} autoComplete="off" onSubmit={signIn}>
-        <h2 className={styles.formTitle}>Sign In</h2>
-        <SignInEmail />
-        <SignInPassword />
-        <button data-test-id="auth-submit" className="button" type="submit">
-          Sign In
-        </button>
-      </form>
-      <span>
+    <>
+      <ToastContainer />
+      <main className={styles.signPage}>
+        <h1 className="visually-hidden">Travel App</h1>
+        <form className={styles.form} autoComplete="off" onSubmit={signIn}>
+          <h2 className={styles.formTitle}>Sign In</h2>
+          <SignInEmail />
+          <SignInPassword />
+          <button data-test-id="auth-submit" className="button" type="submit">
+            Sign In
+          </button>
+        </form>
+        <span>
         Don't have an account?
         <Link
           data-test-id="auth-sign-up-link"
@@ -70,6 +75,7 @@ export const SignInPage: FC = () => {
           Sign Up
         </Link>
       </span>
-    </main>
+      </main>
+    </>
   );
 };
