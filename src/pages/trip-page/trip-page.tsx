@@ -1,27 +1,25 @@
+import { useGetTripByIdQuery } from 'api/api';
 import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
 import { stringifyDate } from "helpers/stringify-date";
-import { ITrip } from "interfaces/trip.interface";
 import { IBooking } from "interfaces/booking.interface";
 import { v4 } from "uuid";
 
 import styles from "./style.module.css";
 
 interface ITripPageProps {
-  trips: ITrip[];
   addBooking: (booking: IBooking) => void;
 }
 
-export const TripPage: FC<ITripPageProps> = ({ trips, addBooking }) => {
+export const TripPage: FC<ITripPageProps> = ({ addBooking }) => {
   const { tripId } = useParams();
-
-  const card = trips.find((trip) => trip.id === tripId) || trips[0];
-  const { description, duration, id, image, level, price, title } = card;
+  const { data: trip } = useGetTripByIdQuery(tripId);
+  const { description, duration, id, image, level, price, title } = trip || {};
 
   const [modalHide, setModalHide] = useState(true);
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(price);
+  const [totalPrice, setTotalPrice] = useState(price || 0);
   const [date, setDate] = useState<string>();
   const [userId] = useState("1dd97a12-848f-4a1d-8a7d-34a2132fca94");
 

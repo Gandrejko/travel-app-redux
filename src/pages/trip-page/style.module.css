@@ -53,3 +53,25 @@
 	display: flex;
 	font-weight: 300;
 }
+
+.tripInfoDuration {
+	min-width: 120px;
+	padding-left: 25px;
+	background-image: url('assets/images/calendar.svg');
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: 15px;
+}
+
+.tripInfoLevel::before {
+	content: '•';
+	margin-right: 10px;
+	color: var(--color-blue-200);
+}
+
+.tripPriceValue {
+	display: block;
+	color: var(--color-blue-200);
+	font-size: var(--font-size-600);
+	line-height: 1;
+}

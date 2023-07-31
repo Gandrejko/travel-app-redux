@@ -1,6 +1,11 @@
 import { Input } from "./input/input";
 
-export const PasswordInput = () => (
+type Props = {
+  password: string;
+  setPassword: (email: string) => void;
+};
+
+export const PasswordInput = ({ password, setPassword }: Props) => (
   <Input
     data-test-id="auth-password"
     name="password"
@@ -11,5 +16,9 @@ export const PasswordInput = () => (
     required
     labelText="Password"
     spanClassNames="input__heading"
+    value={password}
+    onChange={(e) => {
+      setPassword(e.target.value);
+    }}
   />
 );

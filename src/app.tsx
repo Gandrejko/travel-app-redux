@@ -1,8 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "components/header/header";
 import { Footer } from "components/footer/footer";
-import { useState } from "react";
-import { defaultTrip as trips } from "./constants/default-values";
 import { sortBookingsByDate } from "helpers/sort-bookings-by-date";
 import { useBookingList } from "hooks/use-booking-list";
 import { BookingsPage } from "pages/bookings-page/bookings-page";
@@ -14,9 +12,7 @@ import { TRIP_ROUTE_PATTERN } from "routes";
 import { IBooking } from "interfaces/booking.interface";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
   const [bookings, setBookings] = useBookingList();
-
   const addBooking = (newBooking: IBooking) => {
     setBookings(sortBookingsByDate([...bookings, newBooking]));
   };
@@ -29,10 +25,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header isLogin={isLogin} />
+      <Header />
       <Routes>
         <Route path="/">
-          <Route index element={<MainPage setIsLogin={setIsLogin} />} />
+          <Route index element={<MainPage />} />
           <Route
             path="bookings"
             element={
@@ -41,15 +37,15 @@ function App() {
           />
           <Route
             path="sign-in"
-            element={<SignInPage setIsLogin={setIsLogin} />}
+            element={<SignInPage />}
           />
           <Route
             path="sign-up"
-            element={<SignUpPage setIsLogin={setIsLogin} />}
+            element={<SignUpPage />}
           />
           <Route
             path={TRIP_ROUTE_PATTERN}
-            element={<TripPage trips={trips} addBooking={addBooking} />}
+            element={<TripPage addBooking={addBooking} />}
           />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>

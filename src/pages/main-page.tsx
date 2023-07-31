@@ -1,24 +1,28 @@
-import { defaultTrip as trips } from "constants/default-values";
+import { useGetAuthenticatedUserQuery, useGetTripsQuery } from 'api/api';
 import { filterByDuration } from "helpers/filter-by-duration";
 import { filterByLevel } from "helpers/filter-by-level";
 import { filterBySearch } from "helpers/filter-by-search";
-import { Dispatch, FC, useEffect, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Filter } from "components/filter/filter";
 import { Trips } from "components/trips/trips";
+import { useNavigate } from 'react-router-dom';
 
-interface IMainPageProps {
-  setIsLogin: Dispatch<boolean>;
-}
-
-export const MainPage: FC<IMainPageProps> = ({ setIsLogin }) => {
+export const MainPage: FC = () => {
+  const navigate = useNavigate();
+  const { isError } = useGetAuthenticatedUserQuery('');
+  const { data: trips } = useGetTripsQuery([]);
   const [search, setSearch] = useState("");
   const [duration, setDuration] = useState("");
   const [level, setLevel] = useState("");
 
+  if(isError) {
+    navigate('/sign-up');
+  }
+
   const filteredTrips = useMemo(() => {
-    let newTrips = trips;
+    let newTrips = trips || [];
     if (search) {
-      newTrips = filterBySearch(trips, search);
+      newTrips = filterBySearch(newTrips, search);
     }
     if (duration) {
       newTrips = filterByDuration(newTrips, duration);
@@ -27,11 +31,7 @@ export const MainPage: FC<IMainPageProps> = ({ setIsLogin }) => {
       newTrips = filterByLevel(newTrips, level);
     }
     return newTrips;
-  }, [search, duration, level]);
-
-  useEffect(() => {
-    setIsLogin(true);
-  }, []);
+  }, [search, duration, level, trips]);
 
   return (
     <main>
