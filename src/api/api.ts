@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IBooking } from 'interfaces/booking.interface';
 import { ISignInUserDto } from 'interfaces/dto/sign-in-user.dto';
 import { ISignUpUserDto } from 'interfaces/dto/sign-up-user.dto';
+import { IUserDto } from 'interfaces/dto/user.dto';
 import { ITrip } from 'interfaces/trip.interface';
 import { AuthState } from 'store/reducers/auth';
 
@@ -20,8 +21,8 @@ export const api = createApi({
   tagTypes: ['booking'],
   baseQuery,
   endpoints: (builder) => ({
-    getAuthenticatedUser: builder.query({
-      query: () => ({ url: 'auth/authenticated-user' })
+    getAuthenticatedUser: builder.query<IUserDto, void>({
+      query: () => ({ url: 'auth/authenticated-user' }),
     }),
     signUp: builder.mutation<AuthState, ISignUpUserDto>({
       query: (requestBody) => ({

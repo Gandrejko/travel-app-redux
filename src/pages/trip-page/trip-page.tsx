@@ -1,27 +1,22 @@
-import { useCreateBookingMutation, useGetAuthenticatedUserQuery, useGetTripByIdQuery } from 'api/api';
-import { useNavigate, useParams } from "react-router-dom";
+import { useCreateBookingMutation, useGetTripByIdQuery } from 'api/api';
+import { useAppSelector } from 'hooks/redux';
+import { useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
 
 import styles from "./style.module.css";
 
-export const TripPage: FC = () => {  const navigate = useNavigate();
-  const { isError } = useGetAuthenticatedUserQuery('');
-  if(isError) {
-    navigate('/sign-in');
-  }
-
+export const TripPage: FC = () => {
   const { tripId } = useParams();
   const { data: trip } = useGetTripByIdQuery(tripId || '');
   const { description, duration, id, image, level, price, title } = trip || {};
-
+  const user = useAppSelector(state => state.auth.user);
   const [bookingMut] = useCreateBookingMutation();
 
   const [modalHide, setModalHide] = useState(true);
   const [numberOfGuests, setNumberOfGuests] = useState(0);
   const [totalPrice, setTotalPrice] = useState(price || 0);
   const [date, setDate] = useState<string>();
-  const { data: user } = useGetAuthenticatedUserQuery('');
 
   const changeInput = (value: number) => {
     let newValue;
@@ -41,7 +36,7 @@ export const TripPage: FC = () => {  const navigate = useNavigate();
     e.preventDefault();
     const dateInFuture =
       date && new Date(date).getTime() > new Date().getTime();
-    if (!numberOfGuests || !date || !dateInFuture) {
+    if (!numberOfGuests || !date || !dateInFuture || !user) {
       return;
     }
     const newBooking = {

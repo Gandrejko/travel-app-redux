@@ -1,3 +1,4 @@
+import { useAppSelector } from 'hooks/redux';
 import { useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 import { ReactComponent as Briefcase } from "assets/images/briefcase.svg";
@@ -7,6 +8,7 @@ import { authSlice } from 'store/reducers/auth';
 import styles from "./style.module.css";
 
 export const Nav = () => {
+  const fullName = useAppSelector(state => state.auth.user?.fullName);
   const { removeUserData } = authSlice.actions;
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -42,7 +44,7 @@ export const Nav = () => {
                 data-test-id="header-profile-nav-username"
                 className={styles.profileNavItem}
               >
-                John Doe
+                {fullName}
               </li>
               <li className={styles.profileNavItem}>
                 <Link

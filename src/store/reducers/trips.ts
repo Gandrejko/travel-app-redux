@@ -13,8 +13,7 @@ export const tripsSlice = createSlice({
     builder.addMatcher(
       api.endpoints.getTrips.matchFulfilled,
       (state, { payload }) => {
-        // @ts-ignore
-        state.trips = payload.data;
+        state.trips = payload;
       }
     );
   }

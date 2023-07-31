@@ -14,7 +14,7 @@ export const bookingsSlice = createSlice({
       api.endpoints.getBookings.matchFulfilled,
       (state, { payload }) => {
         // @ts-ignore
-        state.bookings = payload.data;
+        state.bookings = payload;
       }
     );
   }
