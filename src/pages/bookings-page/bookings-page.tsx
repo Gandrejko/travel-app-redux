@@ -1,12 +1,18 @@
-import { useGetBookingsQuery } from 'api/api';
+import { useGetAuthenticatedUserQuery, useGetBookingsQuery } from 'api/api';
 import { sortBookingsByDate } from 'helpers/sort-bookings-by-date';
 import { FC } from "react";
 import { BookingCard } from "components/booking-card/booking-card";
 import { IBooking } from "interfaces/booking.interface";
+import { useNavigate } from 'react-router-dom';
 
 import styles from "./style.module.css";
 
 export const BookingsPage: FC = () => {
+  const navigate = useNavigate();
+  const { isError } = useGetAuthenticatedUserQuery('');
+  if(isError) {
+    navigate('/sign-in');
+  }
   const { data: bookings } = useGetBookingsQuery();
   return (
     <main className={styles.bookingsPage}>

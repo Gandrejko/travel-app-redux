@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ISignUpUserDto } from 'interfaces/dto/sign-up-user.dto';
 
-type Page = {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
-const initialState: Page = {
+const initialState: ISignUpUserDto = {
   fullName: '',
   email: '',
   password: ''

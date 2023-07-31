@@ -16,7 +16,7 @@ export const MainPage: FC = () => {
   const [level, setLevel] = useState("");
 
   if(isError) {
-    navigate('/sign-up');
+    navigate('/sign-in');
   }
 
   const filteredTrips = useMemo(() => {

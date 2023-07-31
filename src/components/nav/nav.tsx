@@ -7,11 +7,11 @@ import { authSlice } from 'store/reducers/auth';
 import styles from "./style.module.css";
 
 export const Nav = () => {
-  const { removeToken } = authSlice.actions;
+  const { removeUserData } = authSlice.actions;
   const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.removeItem('token');
-    dispatch(removeToken());
+    dispatch(removeUserData());
   };
   return (
     <nav data-test-id="header-nav" className={styles.nav}>

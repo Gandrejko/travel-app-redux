@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IBooking } from 'interfaces/booking.interface';
+import { ISignInUserDto } from 'interfaces/dto/sign-in-user.dto';
+import { ISignUpUserDto } from 'interfaces/dto/sign-up-user.dto';
 import { ITrip } from 'interfaces/trip.interface';
+import { AuthState } from 'store/reducers/auth';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://binary-travel-app.xyz/api/v1/',
@@ -20,14 +23,14 @@ export const api = createApi({
     getAuthenticatedUser: builder.query({
       query: () => ({ url: 'auth/authenticated-user' })
     }),
-    signUp: builder.mutation({
+    signUp: builder.mutation<AuthState, ISignUpUserDto>({
       query: (requestBody) => ({
         url: "auth/sign-up",
         method: "POST",
         body: requestBody,
       }),
     }),
-    signIn: builder.mutation({
+    signIn: builder.mutation<AuthState, ISignInUserDto>({
       query: (requestBody) => ({
         url: "auth/sign-in",
         method: "POST",

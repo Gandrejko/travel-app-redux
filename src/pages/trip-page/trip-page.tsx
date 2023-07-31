@@ -1,16 +1,21 @@
 import { useCreateBookingMutation, useGetAuthenticatedUserQuery, useGetTripByIdQuery } from 'api/api';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Input } from "components/inputs/input/input";
 
 import styles from "./style.module.css";
 
-export const TripPage: FC = () => {
+export const TripPage: FC = () => {  const navigate = useNavigate();
+  const { isError } = useGetAuthenticatedUserQuery('');
+  if(isError) {
+    navigate('/sign-in');
+  }
+
   const { tripId } = useParams();
   const { data: trip } = useGetTripByIdQuery(tripId || '');
   const { description, duration, id, image, level, price, title } = trip || {};
 
-  const [bookingMut, data] = useCreateBookingMutation();
+  const [bookingMut] = useCreateBookingMutation();
 
   const [modalHide, setModalHide] = useState(true);
   const [numberOfGuests, setNumberOfGuests] = useState(0);
